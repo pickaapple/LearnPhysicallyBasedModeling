@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{29c64ec3-db03-40ec-80d3-f4e5e517cb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalModel">
+      <UniqueIdentifier>{93be58f1-60f6-4936-9cb2-86560ddee0c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{04ec6303-92b5-4f4f-82bb-c9c79d00a1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{65e2f055-77de-4b1e-a477-5a1cb9dee65c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{02fe6d22-9e1b-462c-ae63-ab683f2afbbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{bcaaa985-1b1f-423f-9f29-d7d18b1050e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shaders">
+      <UniqueIdentifier>{c14940b5-2042-43fd-975d-6e366c1eddb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{79f82977-e027-45f1-947d-a0e5a4082fea}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PBM.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Windows\Keyboard.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\Mouse.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\MyWindow.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="PhysicalModel\ODESolver.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\Spring.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\HookForce.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\Particle.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\Force.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\Gravity.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\ParticleSystem.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Matrix.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Camera.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Component.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\GameObject.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Transform.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\World.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Debug.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\ShaderException.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\utility.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Material.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Mesh.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\MeshRenderer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Shader.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\SimpleShader.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\MassSpring.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\MassSpringSystem.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Windows\RenderSetting.h">
+      <Filter>Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Light.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\Geometry.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\MeshData.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\SunLight.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PBM.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="PBM.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PBM.cpp" />
+    <ClCompile Include="Windows\Keyboard.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\Mouse.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\MyWindow.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\ODESolver.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\Spring.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\HookForce.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\Particle.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\Force.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\Gravity.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\ParticleSystem.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Matrix.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Camera.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Component.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\GameObject.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Transform.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\World.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\Debug.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\ShaderException.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Common\utility.cpp">
+      <Filter>Common</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Material.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Mesh.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\MeshRenderer.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Shader.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\SimpleShader.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\MassSpring.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\MassSpringSystem.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Windows\RenderSetting.cpp">
+      <Filter>Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Light.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\Geometry.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\MeshData.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\SunLight.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Graphics\Shaders\light.hlsli">
+      <Filter>Graphics\Shaders</Filter>
+    </None>
+    <None Include="Graphics\Shaders\Simple.hlsli">
+      <Filter>Graphics\Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Graphics\Shaders\Simple_PS.hlsl">
+      <Filter>Graphics\Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Graphics\Shaders\Simple_VS.hlsl">
+      <Filter>Graphics\Shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
