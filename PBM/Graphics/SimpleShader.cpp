@@ -1,8 +1,10 @@
-#include "../Common/ShaderException.h"
+ï»¿#include "../Common/ShaderException.h"
 #include "../Game/World.h"
 #include "SimpleShader.h"
 #include "Material.h"
 #include "Light.h"
+
+#include "../Common/utility.h"
 
 struct VSConstantBuffer
 {
@@ -20,7 +22,7 @@ SimpleShader::SimpleShader()
 {
 	auto vs_filepath = L"Simple_VS.hlsl";
 	auto ps_filepath = L"Simple_PS.hlsl";
-	//´´½¨Shader
+	//åˆ›å»ºShader
 	ID3D10Blob *p_vsBlob = nullptr, *p_psBlob = nullptr;
 	auto_release<ID3D10Blob> a_vsBlob(p_vsBlob), a_psBlob(p_psBlob);
 
@@ -30,15 +32,15 @@ SimpleShader::SimpleShader()
 	ID3D11Device* device = World::GetInstance()->m_pD3DDevice;
 	auto ret = device->CreateVertexShader(p_vsBlob->GetBufferPointer(), p_vsBlob->GetBufferSize(), NULL, &m_pVertexShader);
 	if (FAILED(ret))
-		throw new ShaderException("´´½¨¶¥µã×ÅÉ«Æ÷Ê§°Ü");
+		throw new ShaderException("åˆ›å»ºé¡¶ç‚¹ç€è‰²å™¨å¤±è´¥");
 	ret = device->CreatePixelShader(p_psBlob->GetBufferPointer(), p_psBlob->GetBufferSize(), NULL, &m_pPixelShader);
 	if (FAILED(ret))
-		throw new ShaderException("´´½¨ÏñËØ×ÅÉ«Æ÷Ê§°Ü");
+		throw new ShaderException("åˆ›å»ºåƒç´ ç€è‰²å™¨å¤±è´¥");
 
 	CreateConstantBuffer(device, sizeof(VSConstantBuffer), &m_VSConstantBuffer);
 	CreateConstantBuffer(device, sizeof(PSConstantBuffer), &m_PSConstantBuffer);
 
-	//ÊäÈë²¼¾Ö
+	//è¾“å…¥å¸ƒå±€
 	D3D11_INPUT_ELEMENT_DESC layout[] = {
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA,0},
 		{ "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 16, D3D11_INPUT_PER_VERTEX_DATA,0},
@@ -48,7 +50,7 @@ SimpleShader::SimpleShader()
 	ret = device->CreateInputLayout(layout, numElements,
 		p_vsBlob->GetBufferPointer(), p_vsBlob->GetBufferSize(), &m_pVertexLayout);
 	if (FAILED(ret))
-		throw new ShaderException("´´½¨´´½¨ÊäÈë²¼¾ÖÊ§°ÜÊ§°Ü");
+		throw new ShaderException("åˆ›å»ºåˆ›å»ºè¾“å…¥å¸ƒå±€å¤±è´¥å¤±è´¥");
 
 	D3D11SetDebugObjectName(m_pVertexShader, "SimpleVS");
 	D3D11SetDebugObjectName(m_pPixelShader, "SimplePS");

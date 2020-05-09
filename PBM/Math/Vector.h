@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <directxmath.h>
 #include <string>
 
@@ -17,6 +17,7 @@ public:
 	float y() const;
 	float z() const;
 	float w() const;
+	float Length() const;
 	void Normalize();
 	Vector Normalized() const;
 
@@ -25,20 +26,32 @@ public:
 	Vector operator-() const;
 	Vector& operator *=(const Matrix& matrix);
 	Vector& operator +=(const Vector& other);
-	
-	static Vector Cross(Vector a, Vector b);
+	float operator[](int index) const;
 
-	const float* data() const;
+	static Vector Cross(const Vector& a, const Vector& b);
+	static Vector Project(const Vector& v, const Vector& on);
+	static float Dot(const Vector& a, const Vector& b);
+	static float Distance(const Vector& a, const Vector& b);
+
+	inline float* data() const;
 	void SetData(const float* pos, size_t size);
 
 	friend Vector operator+(const Vector& a, const Vector& b);
 	friend Vector operator-(const Vector& a, const Vector& b);
 	friend Vector operator*(const Vector& v, float scale);
+	friend Vector operator*(float scale, const Vector& v);
 	friend Vector operator*(const Vector& v, const Matrix& m);
 public:
 	static Vector Forward;
 	static Vector Up;
 	static Vector Right;
+	static Vector Zero;
+	static Vector OnePosition;
+	static Vector OneVector;
 	XMVECTOR m_V;
 };
 
+float * Vector::data() const
+{
+	return (float*)&m_V;
+}

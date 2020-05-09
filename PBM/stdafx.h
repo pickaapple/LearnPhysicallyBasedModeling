@@ -1,6 +1,6 @@
-// stdafx.h: ±ê×¼ÏµÍ³°üº¬ÎÄ¼şµÄ°üº¬ÎÄ¼ş£¬
-// »òÊÇ¾­³£Ê¹ÓÃµ«²»³£¸ü¸ÄµÄ
-// ÏîÄ¿ÌØ¶¨µÄ°üº¬ÎÄ¼ş
+ï»¿// stdafx.h: æ ‡å‡†ç³»ç»ŸåŒ…å«æ–‡ä»¶çš„åŒ…å«æ–‡ä»¶ï¼Œ
+// æˆ–æ˜¯ç»å¸¸ä½¿ç”¨ä½†ä¸å¸¸æ›´æ”¹çš„
+// é¡¹ç›®ç‰¹å®šçš„åŒ…å«æ–‡ä»¶
 //
 
 #pragma once
@@ -11,19 +11,19 @@
 
 #include "targetver.h"
 
-#define WIN32_LEAN_AND_MEAN             // ´Ó Windows Í·ÎÄ¼şÖĞÅÅ³ı¼«ÉÙÊ¹ÓÃµÄÄÚÈİ
-// Windows Í·ÎÄ¼ş
+#define WIN32_LEAN_AND_MEAN             // ä» Windows å¤´æ–‡ä»¶ä¸­æ’é™¤æå°‘ä½¿ç”¨çš„å†…å®¹
+// Windows å¤´æ–‡ä»¶
 #include <windows.h>
 #include <windowsx.h>
 
-// C ÔËĞĞÊ±Í·ÎÄ¼ş
+// C è¿è¡Œæ—¶å¤´æ–‡ä»¶
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
 
 
-// ÔÚ´Ë´¦ÒıÓÃ³ÌĞòĞèÒªµÄÆäËû±êÍ·
+// åœ¨æ­¤å¤„å¼•ç”¨ç¨‹åºéœ€è¦çš„å…¶ä»–æ ‡å¤´
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -33,15 +33,16 @@
 #include <numeric>
 #include <tuple>
 #include <algorithm>
+#include <cassert>
 
 using namespace std;
 
+//DirectXå¤´æ–‡ä»¶
 #include <d3d11.h>
 #include <d3dcompiler.h>
 #include <directxmath.h>
 using namespace DirectX;
 
-#include "./Common/utility.h"
 #define PI 3.1415926
 #define ToRadian(degree) ((degree) * (PI / 180.0))
 #define ToDegree(radian) ((radian) * (180.0 / PI))
@@ -63,15 +64,15 @@ inline POINT PointSubstract(const POINT& a, const POINT& b)
 
 enum KEY_STATE {
 	KEY_STATE_NONE = 0,
-	KEY_STATE_DOWN,  //°´ÏÂ
-	KEY_STATE_PRESS,  //³¤°´
-	KEY_STATE_UP,         //ÊÍ·Å
+	KEY_STATE_DOWN,  //æŒ‰ä¸‹
+	KEY_STATE_PRESS,  //é•¿æŒ‰
+	KEY_STATE_UP,         //é‡Šæ”¾
 	KEY_STATE_NUM
 };
 
 typedef unsigned char KeyCode;
 
-//»Øµ÷½Ó¿Ú
+//å›è°ƒæ¥å£
 class CallKeyStateChange
 {
 public:
@@ -84,10 +85,14 @@ public:
 	virtual void Move(double speed) = 0;
 };
 
+#if !defined(_DEBUG) && defined(DEBUG)
+#define _DEBUG
+#endif
+
 template<UINT TNameLength>
 inline void D3D11SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_ const char(&name)[TNameLength])
 {
-#if defined(DEBUG) || defined(_DEBUG)
+#if defined(_DEBUG)
 	resource->SetPrivateData(WKPDID_D3DDebugObjectName, TNameLength - 1, name);
 #else
 	UNREFERENCED_PARAMETER(resource);
@@ -98,7 +103,7 @@ inline void D3D11SetDebugObjectName(_In_ ID3D11DeviceChild* resource, _In_ const
 template<UINT TNameLength>
 inline void DXGISetDebugObjectName(_In_ IDXGIObject* resource, _In_ const char(&name)[TNameLength])
 {
-#if defined(DEBUG) || defined(_DEBUG)
+#if defined(_DEBUG)
 	resource->SetPrivateData(WKPDID_D3DDebugObjectName, TNameLength - 1, name);
 #else
 	UNREFERENCED_PARAMETER(resource);

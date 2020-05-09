@@ -1,4 +1,4 @@
-#include "MeshRenderer.h"
+ï»¿#include "MeshRenderer.h"
 #include "Mesh.h"
 #include "Material.h"
 
@@ -13,10 +13,10 @@ void MeshRenderer::Started()
 {
 	m_Mesh = gameObject->GetComponent<Mesh>();
 	if (!m_Mesh)
-		Debug::LogError("MeshÎª¿Õ");
+		Debug::LogError("Meshä¸ºç©º");
 	m_Material = gameObject->GetComponent<Material>();
 	if (!m_Material)
-		Debug::LogError("MaterialÎª¿Õ");
+		Debug::LogError("Materialä¸ºç©º");
 }
 
 void MeshRenderer::Render(ID3D11DeviceContext * context, RenderState& state)
@@ -30,7 +30,7 @@ void MeshRenderer::Render(ID3D11DeviceContext * context, RenderState& state)
 	context->IASetVertexBuffers(0, 1, &m_Mesh->m_pVertexBuffer, &stride, &offset);
 	context->IASetIndexBuffer(m_Mesh->m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	UINT start = 0;
-	UINT count = m_Mesh->m_MeshData.Indices.size();
+	UINT count = (UINT)(m_Mesh->m_MeshData.Indices.size());
 	if (count != 0)
 	{
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

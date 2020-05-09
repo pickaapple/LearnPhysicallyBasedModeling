@@ -1,37 +1,43 @@
 #pragma once
 
+#include "../Math/Vector.h"
+
 class Particle
 {
 public:
-	Particle(const float* pos, float mass);
-	inline float* GetPos();
-	void SetPos(const float* pos);
-	inline float* GetVelocity();
-	void SetVelocity(const float* v);
-	inline const float* GetForce();
-	void SetForce(const float* f);
+	Particle(const Vector& pos, float mass);
+	void SetPos(const Vector& pos);
+	void SetPos(const float* pos, size_t size);
+	void SetVelocity(const Vector& v);
+	void SetVelocity(const float* v, size_t size);
+	void SetForce(const Vector& f);
+	void SetForce(const float* f, size_t size);
 	void ResetForce();
+	void AddForce(const Vector& f);
+	inline void SetMass(float m);
+	inline const Vector& GetPos() const;
+	inline const Vector& GetVelocity() const;
+	inline  const Vector& GetForce() const;
 	inline void GetAcceleration(float* a);
 	inline float GetMass();
-	inline void SetMass(float m);
 protected:
-	float m_P[3];
-	float m_V[3];
-	float m_F[3];
+	Vector m_P;
+	Vector m_V;
+	Vector m_F;
 	float m_Mass;
 };
 
-float* Particle::GetPos()
+const Vector& Particle::GetPos() const
 {
 	return m_P;
 }
 
-inline float * Particle::GetVelocity()
+const Vector& Particle::GetVelocity() const
 {
 	return m_V;
 }
 
-inline const  float * Particle::GetForce()
+const Vector& Particle::GetForce() const
 {
 	return m_F;
 }

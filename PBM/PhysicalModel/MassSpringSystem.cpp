@@ -44,6 +44,14 @@ void MassSpringSystem::Updated()
 	m_ParticleSystem.ZeroParticlesForces();
 	m_ParticleSystem.CalculateForces();
 	auto world = World::GetInstance();
-	double deltaTime = world->m_DeltaTime / 1000;
-	solver.EulerStep(m_ParticleSystem, deltaTime);
+	float deltaTime = (float)(world->m_DeltaTime / 1000);
+	auto curState = m_ParticleSystem.GetState();
+	auto nextState = m_ODESolver.EulerStep(m_ParticleSystem, deltaTime);
+	float collisionTime;
+	if (m_ParticleSystem.Collision(curState, nextState, m_ODESolver, collisionTime))
+	{
+		nextState = m_ODESolver.EulerStep(m_ParticleSystem, collisionTime);
+	}
+	m_ParticleSystem.SetState(nextState);
+	m_ParticleSystem.m_Time += deltaTime;
 }

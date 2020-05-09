@@ -1,4 +1,4 @@
-#include "Mesh.h"
+ï»¿#include "Mesh.h"
 #include "../Game/World.h"
 
 Mesh::Mesh(MeshData& meshData) :
@@ -27,10 +27,10 @@ void Mesh::SetVertexPositions(const float * pos, size_t oneSize, size_t length, 
 	}
 }
 
-void Mesh::SetVertexPosition(const float * pos, size_t oneSize, size_t index)
+void Mesh::SetVertexPosition(const Vector& pos, size_t index)
 {
 	m_DirtyVertexData = true;
-	m_MeshData.Vertex[index].Pos.SetData(pos, oneSize);
+	m_MeshData.Vertex[index].Pos = pos;
 }
 
 void Mesh::PrepareRender(ID3D11DeviceContext * context)
@@ -69,7 +69,7 @@ void Mesh::CreateVertexBuffer(ID3D11Device* device, bool dynamic)
 		bd.Usage = D3D11_USAGE_DEFAULT;
 		bd.CPUAccessFlags = 0;
 	}
-	bd.ByteWidth = sizeof(MeshVertex) * m_MeshData.Vertex.size();
+	bd.ByteWidth = (UINT)(sizeof(MeshVertex) * m_MeshData.Vertex.size());
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.MiscFlags = 0;
 	D3D11_SUBRESOURCE_DATA InitData;
@@ -77,8 +77,8 @@ void Mesh::CreateVertexBuffer(ID3D11Device* device, bool dynamic)
 	InitData.pSysMem = m_MeshData.Vertex.data();
 	HRESULT ret = device->CreateBuffer(&bd, &InitData, &m_pVertexBuffer);
 	if (FAILED(ret))
-		Debug::LogError("´´½¨¶¥µã»º´æÊ§°Ü");
-	D3D11SetDebugObjectName(m_pVertexBuffer, "Íø¸ñ¶¥µã»º³åÇø");
+		Debug::LogError("åˆ›å»ºé¡¶ç‚¹ç¼“å­˜å¤±è´¥");
+	D3D11SetDebugObjectName(m_pVertexBuffer, "ç½‘æ ¼é¡¶ç‚¹ç¼“å†²åŒº");
 }
 
 void Mesh::CreateIndexBuffer(ID3D11Device* device)
@@ -86,7 +86,7 @@ void Mesh::CreateIndexBuffer(ID3D11Device* device)
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(WORD) * m_MeshData.Indices.size();
+	bd.ByteWidth = (UINT)(sizeof(WORD) * m_MeshData.Indices.size());
 	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	bd.CPUAccessFlags = 0;
 	bd.MiscFlags = 0;
@@ -96,7 +96,7 @@ void Mesh::CreateIndexBuffer(ID3D11Device* device)
 	auto ret = device->CreateBuffer(&bd, &InitData, &m_pIndexBuffer);
 
 	if (FAILED(ret))
-		Debug::LogError("´´½¨Ë÷Òý»º´æÊ§°Ü");
+		Debug::LogError("åˆ›å»ºç´¢å¼•ç¼“å­˜å¤±è´¥");
 
-	D3D11SetDebugObjectName(m_pIndexBuffer, "Íø¸ñË÷Òý»º³åÇø");
+	D3D11SetDebugObjectName(m_pIndexBuffer, "ç½‘æ ¼ç´¢å¼•ç¼“å†²åŒº");
 }

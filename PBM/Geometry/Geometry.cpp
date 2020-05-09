@@ -1,4 +1,4 @@
-#include "Geometry.h"
+Ôªø#include "Geometry.h"
 #include <cmath>
 
 using namespace std;
@@ -10,46 +10,46 @@ MeshData Geometry::CreateBox(float width, float height, float depth, const Vecto
 	auto h2 = height / 2;
 	auto d2 = depth / 2;
 	Vector vertex[24]{
-		//…œ
+		//‰∏ä
 		{-w2, h2, -d2, 1.0},{-w2, h2,  d2, 1.0},{w2, h2, d2, 1.0},{w2, h2, -d2, 1.0},
-		//∫Û
+		//Âêé
 		{-w2, -h2, -d2, 1.0},{-w2, h2, -d2, 1.0},{w2, h2, -d2, 1.0},{w2, -h2, -d2, 1.0},
-		//œ¬
+		//‰∏ã
 		{-w2, -h2, -d2, 1.0},{w2, -h2, -d2, 1.0},{w2, -h2, d2, 1.0},{-w2, -h2, d2, 1.0},
-		//«∞
+		//Ââç
 		{-w2, -h2, d2, 1.0},{w2, -h2, d2, 1.0},{w2, h2, d2, 1.0},{-w2, h2, d2, 1.0},
-		//◊Û
+		//Â∑¶
 		{-w2, -h2, -d2, 1.0},{-w2, -h2, d2, 1.0},{-w2, h2, d2, 1.0},{-w2, h2, -d2, 1.0},
-		//”“
+		//Âè≥
 		{w2, -h2, -d2, 1.0},{w2, h2, -d2, 1.0},{w2, h2, d2, 1.0},{w2, -h2, d2, 1.0},
 	};
 	Vector normals[24]{
-		//…œ
+		//‰∏ä
 		{0,1,0,0},{0,1,0,0},{0,1,0,0},{0,1,0,0},
-		//∫Û
+		//Âêé
 		{0, 0,-1,0},{0, 0, -1, 0},{0, 0, -1, 0},{0, 0, -1, 0},
-		//œ¬
+		//‰∏ã
 		{0, -1, 0},{0, -1, 0},{0, -1, 0},{0, -1, 0},
-		//«∞
+		//Ââç
 		{0, 0, 1},{0, 0, 1},{0, 0, 1},{0, 0, 1},
-		//◊Û
+		//Â∑¶
 		{-1, 0, 0},{-1, 0, 0},{-1, 0, 0},{-1, 0, 0},
-		//”“
+		//Âè≥
 		{1, 0, 0},{1, 0, 0},{1, 0, 0},{1, 0, 0},
 	};
-	for (size_t i = 0; i < 24; ++i)
+	for (unsigned short i = 0; i < 24; ++i)
 		mesh.Vertex.push_back({ vertex[i], color, normals[i] });
 	unsigned short index[6] = { 0,1,2,2,3,0 };
-	for (size_t i = 0; i < 6; ++i)
+	for (unsigned short i = 0; i < 6; ++i)
 	{
-		int base = i * 4;
-		for (size_t j = 0; j < 6; ++j)
+		unsigned short base = i * 4;
+		for (unsigned short j = 0; j < 6; ++j)
 			mesh.Indices.push_back(index[j] + base);
 	}
 	return mesh;
 }
 
-//levels£∫¥π÷±«–√Ê∏ˆ ˝£¨slicesÀÆ∆Ω‘≤∂•µ„∏ˆ ˝
+//levelsÔºöÂûÇÁõ¥ÂàáÈù¢‰∏™Êï∞ÔºåslicesÊ∞¥Âπ≥ÂúÜÈ°∂ÁÇπ‰∏™Êï∞
 MeshData Geometry::CreateSphere(float radius, unsigned short levels, unsigned short slices, const Vector & color)
 {
 	MeshData meshData;
@@ -57,7 +57,7 @@ MeshData Geometry::CreateSphere(float radius, unsigned short levels, unsigned sh
 	//size_t indicesCount = 6 * levels * slices;
 	//meshData.Vertex.resize(vertexCount);
 	//meshData.Indices.resize(indicesCount);
-	//¥Ê∑≈∂•µ„
+	//Â≠òÊîæÈ°∂ÁÇπ
 	auto pushVertex = [&meshData, &color](const Vector& pos)
 	{
 		MeshVertex&& vertex = { pos, color, pos.Normalized() };
@@ -79,7 +79,7 @@ MeshData Geometry::CreateSphere(float radius, unsigned short levels, unsigned sh
 		}
 	}
 	pushVertex({ 0,-radius,0,1 });
-	//À˜“˝
+	//Á¥¢Âºï
 	unsigned short base = 1;
 	for (unsigned short i = 0; i < slices; ++i)
 	{
@@ -102,7 +102,7 @@ MeshData Geometry::CreateSphere(float radius, unsigned short levels, unsigned sh
 			meshData.Indices.push_back(start + next - slices);
 		}
 	}
-	//“—ÃÌº”∂•µ„ ˝¡ø=◊‹ ˝¡ø-◊Óœ¬≤„ ˝¡ø
+	//Â∑≤Ê∑ªÂä†È°∂ÁÇπÊï∞Èáè=ÊÄªÊï∞Èáè-ÊúÄ‰∏ãÂ±ÇÊï∞Èáè
 	base = vertexCount - (1 + slices);
 	for (unsigned short i = 0; i < slices; ++i)
 	{

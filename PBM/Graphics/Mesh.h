@@ -1,6 +1,7 @@
-#pragma once
+ï»¿#pragma once
 #include "../Game/Component.h"
 #include "../Geometry/MeshData.h"
+#include "../Math/Vector.h"
 
 class Mesh : public Component
 {
@@ -8,9 +9,9 @@ public:
 	Mesh(MeshData& vertex);
 	~Mesh();
 	const MeshData& GetMeshData();
-	//ÉèÖÃ¶¥µã×ø±ê£¬length±íÊ¾¶¥µãÊıÁ¿£¬oneSize±íÊ¾×ø±ê·ÖÁ¿Êı£¬step±íÊ¾×ø±êÓë×ø±êÖ®¼äµÄ¼ä¸ôÊı
+	//è®¾ç½®é¡¶ç‚¹åæ ‡ï¼Œlengthè¡¨ç¤ºé¡¶ç‚¹æ•°é‡ï¼ŒoneSizeè¡¨ç¤ºåæ ‡åˆ†é‡æ•°ï¼Œstepè¡¨ç¤ºåæ ‡ä¸åæ ‡ä¹‹é—´çš„é—´éš”æ•°
 	void SetVertexPositions(const float* pos, size_t oneSize, size_t length, size_t step);
-	void SetVertexPosition(const float* pos, size_t oneSize, size_t index);
+	void SetVertexPosition(const Vector& pos, size_t index);
 	void PrepareRender(ID3D11DeviceContext * context);
 protected:
 	virtual void Started() override;

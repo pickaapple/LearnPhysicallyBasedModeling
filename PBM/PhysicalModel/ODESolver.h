@@ -1,10 +1,11 @@
-#pragma once
+Ôªø#pragma once
 #include "ParticleSystem.h"
 
 class ODESolver
 {
 public:
-	//deltaTµ•ŒªŒ™√Î
-	void EulerStep(ParticleSystem& system, double deltaT);
+	//deltaTÂçï‰Ωç‰∏∫Áßí
+	ParticleState EulerStep(const ParticleSystem& system, float deltaT);
+	float TimeUsed(ParticleState::Element preState, ParticleState::Element nextState);
 };
 

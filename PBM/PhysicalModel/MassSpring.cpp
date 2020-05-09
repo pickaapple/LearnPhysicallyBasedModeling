@@ -27,7 +27,7 @@ void MassSpring::Started()
 	for (size_t i = 0; i < vertexCount; ++i)
 	{
 		auto& vertex = meshData.Vertex[i];
-		auto particle = new Particle(vertex.Pos.data(), 1);
+		auto particle = new Particle(vertex.Pos, 1);
 		m_Particles.push_back(particle);
 	}
 	size_t triangleCount = meshData.Indices.size() / 3;
@@ -62,7 +62,7 @@ void MassSpring::Update()
 		for (size_t i = 0; i < m_Particles.size(); ++i)
 		{
 			auto* p = m_Particles[i];
-			m_Mesh->SetVertexPosition(p->GetPos(), 3, i);
+			m_Mesh->SetVertexPosition(p->GetPos(), i);
 		}
 	}
 }

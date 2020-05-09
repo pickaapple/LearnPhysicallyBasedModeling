@@ -20,14 +20,14 @@
     <Filter Include="Common">
       <UniqueIdentifier>{02fe6d22-9e1b-462c-ae63-ab683f2afbbb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Geometry">
+      <UniqueIdentifier>{79f82977-e027-45f1-947d-a0e5a4082fea}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Graphics">
       <UniqueIdentifier>{bcaaa985-1b1f-423f-9f29-d7d18b1050e4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Graphics\Shaders">
       <UniqueIdentifier>{c14940b5-2042-43fd-975d-6e366c1eddb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Geometry">
-      <UniqueIdentifier>{79f82977-e027-45f1-947d-a0e5a4082fea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

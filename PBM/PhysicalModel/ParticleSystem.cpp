@@ -1,4 +1,20 @@
-#include "ParticleSystem.h"
+﻿#include "ParticleSystem.h"
+#include "ODESolver.h"
+#include "../Common/utility.h"
+#include "../Common/Debug.h"
+
+#include <limits>
+
+ParticleState::ParticleState(const ParticleState & other, bool warning)
+{
+#if _DEBUG
+	if (warning)
+		Debug::LogWarning("ParticleState的赋值函数较耗时，推荐使用右值赋值构造");
+#endif
+	m_Length = other.m_Length;
+	m_State = new float[m_Length];
+	memcpy(m_State, other.m_State, m_Length * sizeof(float));
+}
 
 ParticleState::ParticleState(ParticleState && other)
 {
@@ -8,14 +24,21 @@ ParticleState::ParticleState(ParticleState && other)
 	other.m_State = nullptr;
 }
 
-ParticleState ParticleSystem::GetState()
+ParticleSystem::ParticleSystem() :
+	m_GroundNormal(0, 1, 0, 0),
+	m_GroundY(-5),
+	m_Krestitution(0.5)
+{
+}
+
+ParticleState ParticleSystem::GetState() const
 {
 	size_t length = 6 * m_Particles.size();
 	ParticleState state(length);
 	for (size_t i = 0; i < m_Particles.size(); ++i)
 	{
-		state.SetState(3 * 2 * i, m_Particles[i]->GetPos(), 3);
-		state.SetState(3 * (2 * i + 1), m_Particles[i]->GetVelocity(), 3);
+		state.SetState(3 * 2 * i, m_Particles[i]->GetPos().data(), 3);
+		state.SetState(3 * (2 * i + 1), m_Particles[i]->GetVelocity().data(), 3);
 	}
 	return std::move(state);
 }
@@ -24,18 +47,18 @@ void ParticleSystem::SetState(const ParticleState& state)
 {
 	for (size_t i = 0; i < m_Particles.size(); ++i)
 	{
-		m_Particles[i]->SetPos(state.GetState(3 * 2 * i));
-		m_Particles[i]->SetVelocity(state.GetState(3 * (2 * i + 1)));
+		m_Particles[i]->SetPos(state.GetState(3 * 2 * i), 3);
+		m_Particles[i]->SetVelocity(state.GetState(3 * (2 * i + 1)), 3);
 	}
 }
 
-ParticleState ParticleSystem::Derivative()
+ParticleState ParticleSystem::Derivative() const
 {
 	size_t length = 6 * m_Particles.size();
 	ParticleState state(length);
 	for (size_t i = 0; i < m_Particles.size(); ++i)
 	{
-		state.SetState(3 * 2 * i, m_Particles[i]->GetVelocity(), 3);
+		state.SetState(3 * 2 * i, m_Particles[i]->GetVelocity().data(), 3);
 		float a[3];
 		m_Particles[i]->GetAcceleration(a);
 		state.SetState(3 * (2 * i + 1), a, 3);
@@ -55,6 +78,31 @@ void ParticleSystem::CalculateForces()
 		f->ApplyForce(*this);
 }
 
+bool ParticleSystem::Collision(const ParticleState & preState, ParticleState & nextState, ODESolver& solver, float& t)
+{
+	Vector posInGround(0, m_GroundY, 0, 1.0f);
+	//最早碰撞粒子，碰撞时间戳
+	t = std::numeric_limits<float>::max();
+	//碰撞检测
+	for (size_t i = 0; i < nextState.Length(); i += 6)
+	{
+		Vector curPos(nextState[i], nextState[i + 1ull], nextState[i + 2ull], 1.0f);
+		auto v = curPos - posInGround;
+		float dot = Vector::Dot(v, m_GroundNormal);
+		if (LT(dot, 0))
+		{
+			Vector prePos(preState[i], preState[i + 1ull], preState[i + 2ull], 1.0f);
+			//假设碰撞体只有地面
+			Vector collisionPoint = prePos + (curPos - prePos)*((m_GroundY - prePos.y()) / (curPos.y() - prePos.y()));
+			ParticleState::Element collisionState{ collisionPoint.x(), collisionPoint.y(), collisionPoint.z() };
+			auto time = solver.TimeUsed(&preState[i], collisionState);
+			if (time < t)
+				t = time;
+		}
+	}
+	return t < std::numeric_limits<float>::max();
+}
+
 ParticleState::ParticleState(size_t length)
 {
 	m_State = new float[length];
@@ -66,12 +114,12 @@ ParticleState::~ParticleState()
 	if (m_State) delete[] m_State;
 }
 
-void ParticleState::SetState(int index, const float * state, size_t length)
+void ParticleState::SetState(long long index, const float * state, size_t length)
 {
 	memcpy(m_State + index, state, length * sizeof(float));
 }
 
-void ParticleState::CopyState(int index, float * state, size_t length) const
+void ParticleState::CopyState(long long index, float * state, size_t length) const
 {
 	memcpy(state, m_State + index, length * sizeof(float));
 }
@@ -84,7 +132,7 @@ string ParticleState::ToString() const
 	return std::move(ans);
 }
 
-const float * ParticleState::GetState(int index) const
+const float * ParticleState::GetState(long long index) const
 {
 	return m_State + index;
 }
@@ -101,4 +149,18 @@ ParticleState & ParticleState::operator+=(ParticleState & other)
 	for (size_t i = 0; i < m_Length && i < other.m_Length; ++i)
 		m_State[i] += other.m_State[i];
 	return *this;
+}
+
+ParticleState & ParticleState::operator=(ParticleState && other)
+{
+	m_State = other.m_State;
+	m_Length = other.m_Length;
+	other.m_Length = 0;
+	other.m_State = nullptr;
+	return *this;
+}
+
+float & ParticleState::operator[](size_t index) const
+{
+	return m_State[index];
 }

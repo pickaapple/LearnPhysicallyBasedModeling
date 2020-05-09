@@ -1,33 +1,51 @@
 #include <memory>
+#include <algorithm>
 
 #include "Particle.h"
 
 
-Particle::Particle(const float * pos, float mass)
+Particle::Particle(const Vector& pos, float mass) :
+	m_P(pos), m_Mass(mass)
 {
-	memcpy(m_P, pos, 3 * sizeof(float));
-	memset(m_V, 0, 3 * sizeof(float));
-	memset(m_F, 0, 3 * sizeof(float));
-	m_Mass = mass;
 }
 
-void Particle::SetPos(const float * pos)
+void Particle::SetPos(const Vector & pos)
 {
-	memcpy(m_P, pos, 3 * sizeof(float));
+	m_P = pos;
 }
 
-void Particle::SetVelocity(const float * v)
+void Particle::SetPos(const float * pos, size_t size)
 {
-	memcpy(m_V, v, 3 * sizeof(float));
+	m_P.SetData(pos, size);
 }
 
-void Particle::SetForce(const float * f)
+void Particle::SetVelocity(const Vector & v)
 {
-	memcpy(m_F, f, 3 * sizeof(float));
+	m_V = v;
+}
+
+void Particle::SetVelocity(const float * v, size_t size)
+{
+	m_V.SetData(v, size);
+}
+
+void Particle::SetForce(const Vector & f)
+{
+	m_F = f;
+}
+
+void Particle::SetForce(const float * f, size_t size)
+{
+	m_F.SetData(f, size);
 }
 
 void Particle::ResetForce()
 {
-	memset(m_F, 0, 3 * sizeof(float));
+	m_F = Vector::Zero;
+}
+
+void Particle::AddForce(const Vector & f)
+{
+	m_F += f;
 }
 
