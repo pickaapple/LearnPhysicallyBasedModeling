@@ -169,6 +169,10 @@ int MyWindow::Run()
 		cout << "\rframe time usage: " << interval << "ms  ";
 		if (interval > 0.0 && interval < mspf)
 			Sleep((DWORD)(mspf - interval));
+#if _DEBUG
+		else if (interval > 1000)
+			continue;// DEBUG 模式时间过长时 忽略当前帧时间
+#endif
 		QueryInterruptTime(&endTime);
 		gameWorld->m_DeltaTime = (endTime - startTime) / 10000.0;
 	}

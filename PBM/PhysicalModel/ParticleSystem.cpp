@@ -27,7 +27,8 @@ ParticleState::ParticleState(ParticleState && other)
 ParticleSystem::ParticleSystem() :
 	m_GroundNormal(0, 1, 0, 0),
 	m_GroundY(-5),
-	m_Krestitution(0.5)
+	m_Krestitution(0.5),
+	m_Kfriction(0.5)
 {
 }
 
@@ -78,11 +79,11 @@ void ParticleSystem::CalculateForces()
 		f->ApplyForce(*this);
 }
 
-bool ParticleSystem::Collision(const ParticleState & preState, ParticleState & nextState, ODESolver& solver, float& t)
+bool ParticleSystem::CollisionDetection(const ParticleState & preState, ParticleState & nextState, ODESolver& solver, float& collisionTime)
 {
 	Vector posInGround(0, m_GroundY, 0, 1.0f);
 	//最早碰撞粒子，碰撞时间戳
-	t = std::numeric_limits<float>::max();
+	collisionTime = std::numeric_limits<float>::max();
 	//碰撞检测
 	for (size_t i = 0; i < nextState.Length(); i += 6)
 	{
@@ -96,11 +97,35 @@ bool ParticleSystem::Collision(const ParticleState & preState, ParticleState & n
 			Vector collisionPoint = prePos + (curPos - prePos)*((m_GroundY - prePos.y()) / (curPos.y() - prePos.y()));
 			ParticleState::Element collisionState{ collisionPoint.x(), collisionPoint.y(), collisionPoint.z() };
 			auto time = solver.TimeUsed(&preState[i], collisionState);
-			if (time < t)
-				t = time;
+			if (time < collisionTime)
+				collisionTime = time;
 		}
 	}
-	return t < std::numeric_limits<float>::max();
+	return collisionTime < std::numeric_limits<float>::max();
+}
+
+void ParticleSystem::CollisionResponse(ODESolver & solver)
+{
+	Vector posInGround(0, m_GroundY, 0, 1.0f);
+	for (size_t i = 0; i < m_Particles.size(); ++i) {
+		auto* particle = m_Particles[i];
+		auto v = particle->GetPos() - posInGround;
+		float dot = Vector::Dot(v, m_GroundNormal);
+		if (LET(dot, 0))
+		{
+			//摩擦力与反作用力
+			auto f = particle->GetForce();
+			auto fNormal = Vector::Project(f, m_GroundNormal);
+			auto friction = (f - fNormal)*-m_Kfriction;
+			particle->AddForce(friction - fNormal);
+			//速度反弹
+			auto v = particle->GetVelocity();
+			auto vNormal = Vector::Project(v, m_GroundNormal);
+			auto vTangential = v - vNormal;
+			particle->SetVelocity(-m_Krestitution * vNormal + vTangential);
+		}
+	}
+
 }
 
 ParticleState::ParticleState(size_t length)

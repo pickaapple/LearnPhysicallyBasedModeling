@@ -4,6 +4,7 @@
 
 #include "../Game/GameObject.h"
 #include "../Game/World.h"
+#include "../Windows/RenderSetting.h"
 
 MeshRenderer::MeshRenderer()
 {

@@ -12,6 +12,14 @@ struct MeshVertex
 	Vector Normal;
 };
 
+//捆绑在一起的顶点
+class VertexBundle
+{
+public:
+	void SetPos(const Vector& pos);
+	vector<MeshVertex*> m_Bundle;
+};
+
 class MeshData
 {
 public:

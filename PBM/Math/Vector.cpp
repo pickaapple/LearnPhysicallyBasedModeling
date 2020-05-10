@@ -52,6 +52,11 @@ void Vector::Normalize()
 	m_V = XMVector3Normalize(m_V);
 }
 
+void Vector::Project(const Vector & on)
+{
+	*this = Vector::Project(*this, on);
+}
+
 Vector Vector::Normalized() const
 {
 	return XMVector3Normalize(m_V);

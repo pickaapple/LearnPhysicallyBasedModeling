@@ -1,5 +1,8 @@
 ﻿#include "MassSpringSystem.h"
 #include "../Game/World.h"
+#include "../Common/utility.h"
+
+#include <utility>
 
 MassSpringSystem::MassSpringSystem() :
 	GameObject("MassSpringSystem")
@@ -47,10 +50,18 @@ void MassSpringSystem::Updated()
 	float deltaTime = (float)(world->m_DeltaTime / 1000);
 	auto curState = m_ParticleSystem.GetState();
 	auto nextState = m_ODESolver.EulerStep(m_ParticleSystem, deltaTime);
+	float collisionProcessTime = 0;
 	float collisionTime;
-	if (m_ParticleSystem.Collision(curState, nextState, m_ODESolver, collisionTime))
+	while (m_ParticleSystem.CollisionDetection(curState, nextState, m_ODESolver, collisionTime))
 	{
+		collisionProcessTime += collisionTime;
+		if (MET(collisionProcessTime, deltaTime))
+			break;
 		nextState = m_ODESolver.EulerStep(m_ParticleSystem, collisionTime);
+		m_ParticleSystem.SetState(nextState);
+		m_ParticleSystem.CollisionResponse(m_ODESolver);
+		curState = m_ParticleSystem.GetState();
+		nextState = m_ODESolver.EulerStep(m_ParticleSystem, deltaTime - collisionProcessTime);
 	}
 	m_ParticleSystem.SetState(nextState);
 	m_ParticleSystem.m_Time += deltaTime;

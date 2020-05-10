@@ -19,6 +19,7 @@ public:
 	float w() const;
 	float Length() const;
 	void Normalize();
+	void Project(const Vector& on);
 	Vector Normalized() const;
 
 	string ToString() const;

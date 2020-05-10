@@ -54,13 +54,14 @@ public:
 	//根据两个粒子状态判断状态之间的间隔期间，是否发生碰撞。
 	//如果发生碰撞则通过线性插值计算出第一个粒子发生碰撞时刻的状态。
 	//碰撞时刻，从0 preState时刻开始计算
-	bool Collision(const ParticleState& preState, ParticleState& nextState, ODESolver& solver, float& t);
-
+	bool CollisionDetection(const ParticleState& preState, ParticleState& nextState, ODESolver& solver, float& collisionTime);
+	void CollisionResponse(ODESolver& solver);
 	vector<Particle*> m_Particles;
 	vector<Force*> m_Forces;
 	float m_Time;
 	//指向合法区域
 	Vector m_GroundNormal;
-	float m_Krestitution;// 回弹系数 coefficient of restitution
+	float m_Kfriction; // 地面摩擦力系数
+	float m_Krestitution;// 地面回弹系数 coefficient of restitution
 	float m_GroundY;
 };
