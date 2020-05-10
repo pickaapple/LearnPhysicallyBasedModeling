@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Keyboard.h"
 #include "Mouse.h"
 #define MAX_LOADSTRING 100
@@ -23,11 +23,11 @@ public:
 	void Moving(const RECT& rect);
 	void Moved(int screen_x, int screen_y);
 public:
-	HINSTANCE hInstance;  // µ±Ç°ÊµÀı
+	HINSTANCE hInstance;  // å½“å‰å®ä¾‹
 	Keyboard m_Keyboard;
 	Mouse m_Mouse;
 private:
-	WCHAR title[MAX_LOADSTRING], windowClass[MAX_LOADSTRING];  // ±êÌâÀ¸ÎÄ±¾ Ö÷´°¿ÚÀàÃû
+	WCHAR title[MAX_LOADSTRING], windowClass[MAX_LOADSTRING];  // æ ‡é¢˜æ æ–‡æœ¬ ä¸»çª—å£ç±»å
 	double width, height;
 	WindowInfo m_Info;
 };

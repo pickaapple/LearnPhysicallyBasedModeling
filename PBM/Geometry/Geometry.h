@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "MeshData.h"
 class Geometry
 {
 public:
 	static MeshData CreateBox(float width, float height, float depth, const Vector& color);
-	//levels£º´¹Ö±ÇĞÃæ¸öÊı£¬slicesË®Æ½Ô²¶¥µã¸öÊı
+	//levelsï¼šå‚ç›´åˆ‡é¢ä¸ªæ•°ï¼Œslicesæ°´å¹³åœ†é¡¶ç‚¹ä¸ªæ•°
 	static MeshData CreateSphere(float radius, unsigned short levels, unsigned short slices, const  Vector& color);
 };
 

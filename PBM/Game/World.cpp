@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "GameObject.h"
 #include "World.h"
 #include "SunLight.h"
@@ -18,7 +18,7 @@ World::~World()
 
 void World::InitResource()
 {
-	// ÉèÖÃÖ÷ÉãÏñ»ú
+	// è®¾ç½®ä¸»æ‘„åƒæœº
 	m_pMainCamera = new Camera("MainCamera");
 	m_pKeyboard->RegisterKeyStateListener(KEY_R, KEY_STATE_DOWN, m_pMainCamera);
 
@@ -85,7 +85,7 @@ void World::AddGameObject(GameObject * gameObject)
 		m_GameObjectMap.insert(make_pair(name, gameObject));
 	}
 	else {
-		Debug::LogError("ÓÎÏ·¶ÔÏó'" + name + "'ÒÑ´æÔÚ");
+		Debug::LogError("æ¸¸æˆå¯¹è±¡'" + name + "'å·²å­˜åœ¨");
 	}
 }
 

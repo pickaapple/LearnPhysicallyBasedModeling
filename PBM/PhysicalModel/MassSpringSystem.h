@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../Game/GameObject.h"
 #include "MassSpring.h"
 #include "Gravity.h"

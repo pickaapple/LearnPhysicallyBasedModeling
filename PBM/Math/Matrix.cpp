@@ -1,4 +1,4 @@
-#include "Matrix.h"
+ï»¿#include "Matrix.h"
 #include "Vector.h"
 
 Matrix Matrix::Identity(XMMatrixIdentity());
@@ -77,7 +77,7 @@ Matrix Matrix::RoateAxisMatrix(const Vector & axis, float radian)
 
 Matrix Matrix::RoateAxisMatrix(const Vector & position, const Vector & axis, float radian)
 {
-	//ÏÈ½«positionÒÆÖÃÔ­µã£¬ÔÙĞı×ª£¬ÔÙÒÆ»Ø
+	//å…ˆå°†positionç§»ç½®åŸç‚¹ï¼Œå†æ—‹è½¬ï¼Œå†ç§»å›
 	auto matrix = Matrix::Translate(-position);
 	matrix = Matrix::Multiply(matrix, RoateAxisMatrix(axis, radian));
 	matrix = Matrix::Multiply(matrix, Matrix::Translate(position));

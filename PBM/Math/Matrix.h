@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <directxmath.h>
 
 using namespace DirectX;
@@ -13,7 +13,7 @@ public:
 	Matrix(Vector r0, Vector r1, Vector r2, Vector r3);
 
 	void Transpose();
-	//Èç¹ûĞĞÁĞÊ½Îª²»Îª0£¬ÔòÄæ·´¾ØÕó¡£·ñÔò²»Äæ·´£¬ÇÒ·µ»Øfalse¡£
+	//å¦‚æœè¡Œåˆ—å¼ä¸ºä¸ä¸º0ï¼Œåˆ™é€†åçŸ©é˜µã€‚å¦åˆ™ä¸é€†åï¼Œä¸”è¿”å›falseã€‚
 	bool Inverse();
 
 	Matrix Transposed() const;

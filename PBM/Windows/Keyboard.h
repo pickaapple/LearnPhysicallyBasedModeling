@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #define MOUSE_LEFT_BUTTON VK_LBUTTON
 #define MOUSE_RIGHT_BUTTON VK_RBUTTON
 #define MOUSE_MIDDLE_BUTTON VK_MBUTTON

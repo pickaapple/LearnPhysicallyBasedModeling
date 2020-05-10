@@ -1,4 +1,4 @@
-#include "GameObject.h"
+ï»¿#include "GameObject.h"
 #include "Component.h"
 #include "World.h"
 
@@ -71,7 +71,7 @@ void GameObject::Render(ID3D11DeviceContext * context, RenderState state)
 bool GameObject::AddComponent(Component * component)
 {
 	if (component->gameObject) {
-		Debug::LogError("×é¼þ±»¸³Öµ¸ø±ðµÄ¶ÔÏó");
+		Debug::LogError("ç»„ä»¶è¢«èµ‹å€¼ç»™åˆ«çš„å¯¹è±¡");
 		return false;
 	}
 	m_Components.push_back(component);

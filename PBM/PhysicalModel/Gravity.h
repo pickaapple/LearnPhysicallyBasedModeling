@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Force.h"
 class Gravity : public Force
 {

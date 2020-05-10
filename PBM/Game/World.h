@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObject.h"
 #include "Camera.h"
 
@@ -19,7 +19,7 @@ protected:
 	World();
 	~World();
 public:
-	double m_DeltaTime;  // ÉÏÒ»Ö¡Ëù»¨µÄÊ±¼ä µ¥Î»ÊÇms
+	double m_DeltaTime;  // ä¸Šä¸€å¸§æ‰€èŠ±çš„æ—¶é—´ å•ä½æ˜¯ms
 	ID3D11Device* m_pD3DDevice;
 	ID3D11DeviceContext* m_pImmediateContext;
 	IDXGISwapChain* m_pSwapChain;

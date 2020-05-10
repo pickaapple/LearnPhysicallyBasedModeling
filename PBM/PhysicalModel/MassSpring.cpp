@@ -1,4 +1,4 @@
-#include "MassSpring.h"
+ï»¿#include "MassSpring.h"
 #include "../Game/GameObject.h"
 #include "../Graphics/Mesh.h"
 #include "../Graphics/Mesh.h"
@@ -16,7 +16,7 @@ void MassSpring::Started()
 	m_Mesh = gameObject->GetComponent<Mesh>();
 	if (m_Mesh == nullptr)
 	{
-		Debug::LogError("MassSpring×é¼şËùÔÚµÄGameObjectÈ±ÉÙMesh×é¼ş");
+		Debug::LogError("MassSpringç»„ä»¶æ‰€åœ¨çš„GameObjectç¼ºå°‘Meshç»„ä»¶");
 		return;
 	}
 	m_MSSystem = GameObject::Find<MassSpringSystem>("MassSpringSystem");

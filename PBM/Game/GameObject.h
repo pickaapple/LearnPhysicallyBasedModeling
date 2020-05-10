@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "../stdafx.h"
 #include "Transform.h"
 
@@ -39,7 +39,7 @@ protected:
 	virtual void OnDestroy();
 public:
 	Transform m_Transform;
-	bool m_RelativeCoordinate = true; // Ê¹ÓÃÈ«¾Ö×ø±êÏµ »¹ÊÇ Ïà¶Ô×ø±êÏµ
+	bool m_RelativeCoordinate = true; // ä½¿ç”¨å…¨å±€åæ ‡ç³» è¿˜æ˜¯ ç›¸å¯¹åæ ‡ç³»
 	string m_Name;
 protected:
 	EState m_State;
@@ -53,7 +53,7 @@ template<class _Comp>
 bool GameObject::AddComponent()
 {
 	auto* component = new _Comp();
-	static_assert(is_base_of<Component, _Comp>::value, "×é¼ş±ØĞë¼Ì³ĞÓÚComponentÀà");
+	static_assert(is_base_of<Component, _Comp>::value, "ç»„ä»¶å¿…é¡»ç»§æ‰¿äºComponentç±»");
 	return AddComponent(component);
 }
 

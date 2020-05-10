@@ -1,4 +1,4 @@
-#include "Shader.h"
+ï»¿#include "Shader.h"
 #include "../Common/ShaderException.h"
 
 Shader::~Shader()
@@ -19,7 +19,7 @@ void Shader::PrepareRender(ID3D11DeviceContext * context, Material* material)
 
 void Shader::CreateConstantBuffer(ID3D11Device* device, UINT byteWith, ID3D11Buffer ** buffer)
 {
-	//´´½¨³£Á¿»º´æ
+	//åˆ›å»ºå¸¸é‡ç¼“å­˜
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DEFAULT;
@@ -28,20 +28,20 @@ void Shader::CreateConstantBuffer(ID3D11Device* device, UINT byteWith, ID3D11Buf
 	bd.CPUAccessFlags = 0;
 	auto ret = device->CreateBuffer(&bd, NULL, buffer);
 	if (FAILED(ret))
-		throw new ShaderException("´´½¨³£Á¿»º´æÊ§°Ü");
+		throw new ShaderException("åˆ›å»ºå¸¸é‡ç¼“å­˜å¤±è´¥");
 }
 
 void Shader::CompileShaderFromFile(ID3D10Blob* &blob, LPCWSTR filename, LPCSTR entry, LPCSTR target)
 {
 	UINT flag1 = D3DCOMPILE_ENABLE_STRICTNESS;
 #ifdef _DEBUG
-	flag1 |= D3DCOMPILE_DEBUG; //¿ªÆôDebugÄ£Ê½
-	flag1 |= D3DCOMPILE_SKIP_OPTIMIZATION; // ½ûÖ¹ÓÅ»¯
+	flag1 |= D3DCOMPILE_DEBUG; //å¼€å¯Debugæ¨¡å¼
+	flag1 |= D3DCOMPILE_SKIP_OPTIMIZATION; // ç¦æ­¢ä¼˜åŒ–
 #endif
 	ID3D10Blob *p_errorMessage = nullptr;
 	auto ret = D3DCompileFromFile((m_RootPath + filename).data(), NULL, D3D_COMPILE_STANDARD_FILE_INCLUDE, entry, target, flag1, NULL, &blob, &p_errorMessage);
 	if (FAILED(ret)) {
-		string errorInfo("×ÅÉ«Æ÷±àÒë·¢Éú´íÎó");
+		string errorInfo("ç€è‰²å™¨ç¼–è¯‘å‘ç”Ÿé”™è¯¯");
 		if (p_errorMessage) {
 			char * message = (char *)p_errorMessage->GetBufferPointer();
 			SIZE_T size = p_errorMessage->GetBufferSize();

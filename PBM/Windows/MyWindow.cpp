@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "MyWindow.h"
 #include "RenderSetting.h"
 #include "../Resource.h"
@@ -33,7 +33,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 	HWND hWnd = CreateWindowW(windowClass, title, WS_OVERLAPPEDWINDOW,
 		100, 100, (int)width, (int)height, nullptr, nullptr, hInstance, nullptr);
 	if (!hWnd) {
-		std::cout << "´°¿Ú¾ä±ú´´½¨Ê§°Ü" << std::endl;
+		std::cout << "çª—å£å¥æŸ„åˆ›å»ºå¤±è´¥" << std::endl;
 		return FALSE;
 	}
 
@@ -45,7 +45,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 	ID3D11DeviceContext* immediateContext;
 	ID3D11RenderTargetView* renderTargetView;
 	ID3D11DepthStencilView* depthStencilView;
-	// ½»»»Á´
+	// äº¤æ¢é“¾
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(sd));
 	sd.BufferCount = 1;
@@ -67,7 +67,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 		&sd, &swapChain, &device,
 		NULL, &immediateContext);
 	if (FAILED(ret)) {
-		std::cout << "äÖÈ¾Éè±¸ºÍ½»»»Á´´´½¨Ê§°Ü" << std::endl;
+		std::cout << "æ¸²æŸ“è®¾å¤‡å’Œäº¤æ¢é“¾åˆ›å»ºå¤±è´¥" << std::endl;
 		return FALSE;
 	}
 
@@ -79,7 +79,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 
 	ret = device->CreateRenderTargetView(pBackBuffer, NULL, &renderTargetView);
 	if (FAILED(ret)) return FALSE;
-	//Éî¶È»º³åÇø
+	//æ·±åº¦ç¼“å†²åŒº
 	ID3D11Texture2D *depthStencilBuffer;
 	D3D11_TEXTURE2D_DESC depthSencilDesc;
 	depthSencilDesc.Width = (UINT)width;
@@ -108,7 +108,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 	//device->CreateDepthStencilState(&dsDesc, &pDSState);
 	//immediateContext->OMSetDepthStencilState(pDSState, 1);
 
-	//ÉèÖÃÊÓ¿ÚÓ³Éä²Ã¼ô¿Õ¼ä×ø±êÏµ
+	//è®¾ç½®è§†å£æ˜ å°„è£å‰ªç©ºé—´åæ ‡ç³»
 	D3D11_VIEWPORT vp;
 	vp.Width = (float)width;
 	vp.Height = (float)height;
@@ -141,29 +141,29 @@ int MyWindow::Run()
 	gameWorld->InitResource();
 	double mspf = 1000.0 / 30.0;
 	double interval;
-	// Ö÷ÏûÏ¢Ñ­»·:
+	// ä¸»æ¶ˆæ¯å¾ªçŽ¯:
 	while (WM_QUIT != msg.message)
 	{
 		ULONGLONG startTime;
 		ULONGLONG endTime;
 		QueryInterruptTime(&startTime);
 		int countOfMessage = 0;
-		// ²È¿ÓÈÕ¼Ç 2020/2/22£º
-		// ÕâÀïÊ¹ÓÃwhileÑ­»·£¬¶ø²»Ê¹ÓÃifÊÇÒ»±¾Ñ§ÎÊ¡£
-		// Ê¹ÓÃwhileµÄÒâÍ¼ÊÇÔÚÃ¿Ò»Ö¡¿ªÊ¼Ö®Ç°´¦ÀíËùÓÐÊÕµ½µÄMessageÊÂ¼þ
-		// Èç¹ûÊ¹ÓÃifµÄ»°£¬»áÔì³ÉÒ»Ö¡Ö»´¦ÀíÒ»¸öÊÂ¼þ£¬ÕâÑù»áµ¼ÖÂMessageÊÂ¼þ´¦Àí²»¹ýÀ´£¬Ò»Ö±¶Ñ»ý×Å¡£
-		// µ±Í¬Ê±°´¼üÅÌ ºÍ ÒÆ¶¯Êó±êÊ± Ò»Ö¡ÀÛ¼ÆµÄMessageÊÂ¼þ´óÔ¼ÓÐ5~6¸ö¡£
+		// è¸©å‘æ—¥è®° 2020/2/22ï¼š
+		// è¿™é‡Œä½¿ç”¨whileå¾ªçŽ¯ï¼Œè€Œä¸ä½¿ç”¨ifæ˜¯ä¸€æœ¬å­¦é—®ã€‚
+		// ä½¿ç”¨whileçš„æ„å›¾æ˜¯åœ¨æ¯ä¸€å¸§å¼€å§‹ä¹‹å‰å¤„ç†æ‰€æœ‰æ”¶åˆ°çš„Messageäº‹ä»¶
+		// å¦‚æžœä½¿ç”¨ifçš„è¯ï¼Œä¼šé€ æˆä¸€å¸§åªå¤„ç†ä¸€ä¸ªäº‹ä»¶ï¼Œè¿™æ ·ä¼šå¯¼è‡´Messageäº‹ä»¶å¤„ç†ä¸è¿‡æ¥ï¼Œä¸€ç›´å †ç§¯ç€ã€‚
+		// å½“åŒæ—¶æŒ‰é”®ç›˜ å’Œ ç§»åŠ¨é¼ æ ‡æ—¶ ä¸€å¸§ç´¯è®¡çš„Messageäº‹ä»¶å¤§çº¦æœ‰5~6ä¸ªã€‚
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
 		{
 			countOfMessage++;
 			TranslateMessage(&msg);
-			DispatchMessage(&msg); //½«ÏûÏ¢·Ö·¢¸øÏàÓ¦µÄ´°¿Ú½ø³Ì
+			DispatchMessage(&msg); //å°†æ¶ˆæ¯åˆ†å‘ç»™ç›¸åº”çš„çª—å£è¿›ç¨‹
 		}
 		//if(countOfMessage > 2)
 		//	cout << "Message Count" << countOfMessage << endl;
 		if (!gameWorld->Run())
 			break;
-		//Ö¡ÂÊ¿ØÖÆ
+		//å¸§çŽ‡æŽ§åˆ¶
 		QueryInterruptTime(&endTime);
 		interval = (endTime - startTime) / 10000.0;
 		cout << "\rframe time usage: " << interval << "ms  ";
@@ -217,12 +217,12 @@ void MyWindow::Moved(int screen_x, int screen_y)
 }
 
 //
-//  º¯Êý: WndProc(HWND, UINT, WPARAM, LPARAM)
+//  å‡½æ•°: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  Ä¿±ê: ´¦ÀíÖ÷´°¿ÚµÄÏûÏ¢¡£
+//  ç›®æ ‡: å¤„ç†ä¸»çª—å£çš„æ¶ˆæ¯ã€‚
 //
-//  WM_COMMAND  - ´¦ÀíÓ¦ÓÃ³ÌÐò²Ëµ¥
-//  WM_DESTROY  - ·¢ËÍÍË³öÏûÏ¢²¢·µ»Ø
+//  WM_COMMAND  - å¤„ç†åº”ç”¨ç¨‹åºèœå•
+//  WM_DESTROY  - å‘é€é€€å‡ºæ¶ˆæ¯å¹¶è¿”å›ž
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -232,7 +232,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	case WM_COMMAND:
 	{
 		int wmId = LOWORD(wParam);
-		// ·ÖÎö²Ëµ¥Ñ¡Ôñ:
+		// åˆ†æžèœå•é€‰æ‹©:
 		switch (wmId)
 		{
 		case IDM_ABOUT:
@@ -316,7 +316,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-// ¡°¹ØÓÚ¡±¿òµÄÏûÏ¢´¦Àí³ÌÐò¡£
+// â€œå…³äºŽâ€æ¡†çš„æ¶ˆæ¯å¤„ç†ç¨‹åºã€‚
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(lParam);

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <exception>
 using namespace std;
 class ShaderException : exception

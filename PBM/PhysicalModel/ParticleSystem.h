@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <vector>
 
 #include "Particle.h"
@@ -42,25 +42,25 @@ class ParticleSystem
 {
 public:
 	ParticleSystem();
-	//·µ»ØÁ£×ÓÏµÍ³×´Ì¬ÁĞ±í
-	//Ò»¸öÁ£×ÓµÄ×´Ì¬Îª{position, velocity} 6×Ö½Ú
+	//è¿”å›ç²’å­ç³»ç»ŸçŠ¶æ€åˆ—è¡¨
+	//ä¸€ä¸ªç²’å­çš„çŠ¶æ€ä¸º{position, velocity} 6å­—èŠ‚
 	ParticleState GetState() const;
 	void SetState(const ParticleState& state);
-	//·µ»ØÁ£×ÓÏµÍ³×´Ì¬ÁĞ±í¹ØÓÚÊ±¼äµÄµ¼Êı
-	//Ò»¸öÁ£×Ó×´Ì¬¶ÔÊ±¼äÇóµ¼Îª{velocity, acceleration} 6×Ö½Ú
+	//è¿”å›ç²’å­ç³»ç»ŸçŠ¶æ€åˆ—è¡¨å…³äºæ—¶é—´çš„å¯¼æ•°
+	//ä¸€ä¸ªç²’å­çŠ¶æ€å¯¹æ—¶é—´æ±‚å¯¼ä¸º{velocity, acceleration} 6å­—èŠ‚
 	ParticleState Derivative() const;
 	void ZeroParticlesForces();
 	void CalculateForces();
-	//¸ù¾İÁ½¸öÁ£×Ó×´Ì¬ÅĞ¶Ï×´Ì¬Ö®¼äµÄ¼ä¸ôÆÚ¼ä£¬ÊÇ·ñ·¢ÉúÅö×²¡£
-	//Èç¹û·¢ÉúÅö×²ÔòÍ¨¹ıÏßĞÔ²åÖµ¼ÆËã³öµÚÒ»¸öÁ£×Ó·¢ÉúÅö×²Ê±¿ÌµÄ×´Ì¬¡£
-	//Åö×²Ê±¿Ì£¬´Ó0 preStateÊ±¿Ì¿ªÊ¼¼ÆËã
+	//æ ¹æ®ä¸¤ä¸ªç²’å­çŠ¶æ€åˆ¤æ–­çŠ¶æ€ä¹‹é—´çš„é—´éš”æœŸé—´ï¼Œæ˜¯å¦å‘ç”Ÿç¢°æ’ã€‚
+	//å¦‚æœå‘ç”Ÿç¢°æ’åˆ™é€šè¿‡çº¿æ€§æ’å€¼è®¡ç®—å‡ºç¬¬ä¸€ä¸ªç²’å­å‘ç”Ÿç¢°æ’æ—¶åˆ»çš„çŠ¶æ€ã€‚
+	//ç¢°æ’æ—¶åˆ»ï¼Œä»0 preStateæ—¶åˆ»å¼€å§‹è®¡ç®—
 	bool Collision(const ParticleState& preState, ParticleState& nextState, ODESolver& solver, float& t);
 
 	vector<Particle*> m_Particles;
 	vector<Force*> m_Forces;
 	float m_Time;
-	//Ö¸ÏòºÏ·¨ÇøÓò
+	//æŒ‡å‘åˆæ³•åŒºåŸŸ
 	Vector m_GroundNormal;
-	float m_Krestitution;// »Øµ¯ÏµÊı coefficient of restitution
+	float m_Krestitution;// å›å¼¹ç³»æ•° coefficient of restitution
 	float m_GroundY;
 };

@@ -1,4 +1,4 @@
-#include "Camera.h"
+ï»¿#include "Camera.h"
 #include "../Windows/Keyboard.h"
 #include "../Windows/Mouse.h"
 #include "World.h"
@@ -19,7 +19,7 @@ void Camera::SetCameraMode(ECameraMode mode, GameObject* target)
 	auto tUpDirection = m_pTargetGO->m_Transform.UpDirection();
 	auto tForwarDirection = m_pTargetGO->m_Transform.ForwardDirection();
 	auto tRIghtDirection = m_pTargetGO->m_Transform.RightDirection();
-	// ÉèÖÃÕÕÏà»úµÄ³õÊ¼Î»ÖÃ
+	// è®¾ç½®ç…§ç›¸æœºçš„åˆå§‹ä½ç½®
 	switch (mode) {
 	case FIRST_PLAYER: {
 		float carHeight = 4.5;
@@ -47,7 +47,7 @@ void Camera::Updated()
 	double deltaTime = pWorld->m_DeltaTime;
 	auto& mouse = *pWorld->m_pMouse;
 	auto tPosition = m_pTargetGO->m_Transform.GetPosition();
-	// ÉèÖÃÊó±êÊäÈëÐÅÏ¢
+	// è®¾ç½®é¼ æ ‡è¾“å…¥ä¿¡æ¯
 
 	if (mouse.IsTracking())
 	{
@@ -59,7 +59,7 @@ void Camera::Updated()
 		POINT curMouseCoord = mouse.VirtualCoord();
 		POINT delta = PointSubstract(curMouseCoord, m_MouseCoord);
 		m_MouseCoord = curMouseCoord;
-		//Ë®Æ½·½ÏòÉÏÒÆ¶¯
+		//æ°´å¹³æ–¹å‘ä¸Šç§»åŠ¨
 		if (abs(delta.x) > 20) {
 			auto hRadian = GetHRadian(delta.x, deltaTime);
 			//cout << "Third Player roate surrounding horizontal degree: " << ToDegree(hRadian) << endl;
@@ -76,7 +76,7 @@ void Camera::Updated()
 			else if (m_Mode == FIRST_PLAYER)
 				m_Transform.RoatePositionByAxis(m_Transform.GetPosition(), m_Transform.RightDirection(), vRadian);
 		}
-		//¹öÂÖ»¬¶¯
+		//æ»šè½®æ»‘åŠ¨
 		if (m_Mode == THIRD_PLAYER) {
 			double wheelDistance = mouse.WheelDistance();
 			if (abs(wheelDistance) > FLT_EPSILON) {
@@ -105,7 +105,7 @@ void Camera::Updated()
 		break;
 	}
 	case THIRD_PLAYER: {
-		// Ïà»úÏà¶ÔÓÚÄ¿±êµÄ·½Î»
+		// ç›¸æœºç›¸å¯¹äºŽç›®æ ‡çš„æ–¹ä½
 		auto focusDirection = tPosition - m_Transform.GetPosition();
 		AdjustCameraDirection(focusDirection, { 0,1,0,0 });
 		break;
@@ -138,7 +138,7 @@ void Camera::LookTo(const Vector & eyePosition, Vector focusDirection, Vector up
 
 float Camera::GetHRadian(int deltaX, double deltaTime)
 {
-	//Ë®Æ½·½ÏòÉÏ×ª¶¯
+	//æ°´å¹³æ–¹å‘ä¸Šè½¬åŠ¨
 	float deltaXStage = 0;
 	if (abs(deltaX) > 4)
 		deltaXStage = 1;
@@ -155,7 +155,7 @@ float Camera::GetHRadian(int deltaX, double deltaTime)
 
 float Camera::GetVRadian(int deltaY, double deltaTime)
 {
-	//´¹Ö±·½ÏòÉÏ×ª¶¯
+	//åž‚ç›´æ–¹å‘ä¸Šè½¬åŠ¨
 	float deltaYStage = 0;
 	if (abs(deltaY) > 4)
 		deltaYStage = 1;

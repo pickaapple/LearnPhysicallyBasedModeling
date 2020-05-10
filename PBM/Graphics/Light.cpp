@@ -1,12 +1,12 @@
-#include "Light.h"
+ï»¿#include "Light.h"
 #include "../Game/World.h"
 
 Light::Light() :
 	m_DirectionalLight({
-		{1,1,1,1} , //»·¾³¹â
-		{1,1,1,1}, //Âş·´Éä
-		{1,1,1,1},//¾µÃæ
-		{-1,0,0,0} //·½Ïò
+		{1,1,1,1} , //ç¯å¢ƒå…‰
+		{1,1,1,1}, //æ¼«åå°„
+		{1,1,1,1},//é•œé¢
+		{-1,0,0,0} //æ–¹å‘
 		})
 {
 	auto world = World::GetInstance();

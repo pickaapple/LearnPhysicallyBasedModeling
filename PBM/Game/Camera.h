@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObject.h"
 
 enum ECameraMode {
-	CAMERA_MODE_NONE,  // ¾²Ö¹
-	FIRST_PLAYER,  // µÚÒ»ÈË³Æ
-	THIRD_PLAYER   //  µÚÈıÈË³Æ
+	CAMERA_MODE_NONE,  // é™æ­¢
+	FIRST_PLAYER,  // ç¬¬ä¸€äººç§°
+	THIRD_PLAYER   //  ç¬¬ä¸‰äººç§°
 };
 
 struct ThirdPlayerInfo {
@@ -30,9 +30,9 @@ protected:
 protected:
 	GameObject *m_pTargetGO;
 	ECameraMode m_Mode;
-	double m_VAngularVelocity = ToRadian(60) / 1000.0;  // ´¹Ö±½ÇËÙ¶È µ¥Î» : »¡¶È/ms
+	double m_VAngularVelocity = ToRadian(60) / 1000.0;  // å‚ç›´è§’é€Ÿåº¦ å•ä½ : å¼§åº¦/ms
 	double m_MaxVAngularVelocity = ToRadian(360) / 1000.0;
-	double m_HAngularVelocity = ToRadian(60) / 1000.0;  // Ë®Æ½½ÇËÙ¶È µ¥Î» : »¡¶È/ms
+	double m_HAngularVelocity = ToRadian(60) / 1000.0;  // æ°´å¹³è§’é€Ÿåº¦ å•ä½ : å¼§åº¦/ms
 	double m_MaxHAngularVelocity = ToRadian(360) / 1000.0;
 	float fovAngleY = (float)ToRadian(60.0);
 	float aspectRatio = 1;

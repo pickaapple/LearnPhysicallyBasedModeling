@@ -1,11 +1,11 @@
-#include "light.hlsli"
+ï»¿#include "light.hlsli"
 
 cbuffer VSConstantBuffer : register(b0)
 {
 	matrix g_World;
 	matrix g_View;
 	matrix g_Projection;
-	matrix g_WorldInvTranspose; // ÓÃÓÚ¼ÆËã·¨ÏòÁ¿
+	matrix g_WorldInvTranspose; // ç”¨äºè®¡ç®—æ³•å‘é‡
 }
 
 cbuffer PSConstantBuffer : register(b1)

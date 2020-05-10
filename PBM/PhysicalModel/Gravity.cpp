@@ -1,4 +1,4 @@
-#include "Gravity.h"
+﻿#include "Gravity.h"
 #include "ParticleSystem.h"
 
 void Gravity::ApplyForce(ParticleSystem & system)

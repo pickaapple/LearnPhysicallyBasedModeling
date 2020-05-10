@@ -1,4 +1,4 @@
-#include "SunLight.h"
+﻿#include "SunLight.h"
 #include "../Graphics/Light.h"
 
 SunLight::SunLight(const string & name):

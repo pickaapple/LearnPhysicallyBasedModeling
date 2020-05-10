@@ -1,4 +1,4 @@
-#include "Simple.hlsli"
+﻿#include "Simple.hlsli"
 
 struct VS_IN
 {

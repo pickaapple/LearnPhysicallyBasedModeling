@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "Keyboard.h"
 
 Keyboard::Keyboard() {}
@@ -6,8 +6,8 @@ Keyboard::Keyboard() {}
 
 void Keyboard::SetKeyState(KeyCode code, KEY_STATE state)
 {
-	//³öÏÖÁ½´ÎDownÊÂ¼ş ±íÃ÷Îª PressÊÂ¼ş
-	//ÒÑ¾­ÎªPressÊÂ¼şÊ± ºöÂÔ DownÊÂ¼ş
+	//å‡ºç°ä¸¤æ¬¡Downäº‹ä»¶ è¡¨æ˜ä¸º Pressäº‹ä»¶
+	//å·²ç»ä¸ºPressäº‹ä»¶æ—¶ å¿½ç•¥ Downäº‹ä»¶
 	if ((m_KeyState[code] == KEY_STATE_DOWN || m_KeyState[code] == KEY_STATE_PRESS)
 		&& state == KEY_STATE_DOWN)
 		state = KEY_STATE_PRESS;

@@ -1,18 +1,18 @@
-#pragma once
+ï»¿#pragma once
 class RenderSetting
 {
 public:
 	static void InitSetting(ID3D11Device* device, ID3D11DeviceContext* context);
-	static ID3D11RasterizerState* RSNoCull; // ÎŞ±³ÃæÌŞ³ı
-	static ID3D11RasterizerState* RSCullCW; // Ë³Ê±ÕëÌŞ³ı
-	static ID3D11RasterizerState* RSWireframe; // Ïß¿òÄ£Ê½
+	static ID3D11RasterizerState* RSNoCull; // æ— èƒŒé¢å‰”é™¤
+	static ID3D11RasterizerState* RSCullCW; // é¡ºæ—¶é’ˆå‰”é™¤
+	static ID3D11RasterizerState* RSWireframe; // çº¿æ¡†æ¨¡å¼
 
-	static ID3D11SamplerState* SSLinearWrap; // ÏßĞÔ¹ıÂË
+	static ID3D11SamplerState* SSLinearWrap; // çº¿æ€§è¿‡æ»¤
 
-	static ID3D11BlendState* BSNoColorWrite;		                // ²»Ğ´ÈëÑÕÉ«
+	static ID3D11BlendState* BSNoColorWrite;		                // ä¸å†™å…¥é¢œè‰²
 
-	static ID3D11DepthStencilState* DSSLess;		        // ÔÊĞí»æÖÆĞ¡ÓÚÉî¶ÈÖµµÄÏñËØ
-	static ID3D11DepthStencilState* DSSLessEqual;	    // ÔÊĞí»æÖÆĞ¡ÓÚµÈÓÚÉî¶ÈÖµµÄÏñËØ
-	static ID3D11DepthStencilState* DSSWriteStencil;	    // Ğ´ÈëÄ£°åÖµ
+	static ID3D11DepthStencilState* DSSLess;		        // å…è®¸ç»˜åˆ¶å°äºæ·±åº¦å€¼çš„åƒç´ 
+	static ID3D11DepthStencilState* DSSLessEqual;	    // å…è®¸ç»˜åˆ¶å°äºç­‰äºæ·±åº¦å€¼çš„åƒç´ 
+	static ID3D11DepthStencilState* DSSWriteStencil;	    // å†™å…¥æ¨¡æ¿å€¼
 };
 

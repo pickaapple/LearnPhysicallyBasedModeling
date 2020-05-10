@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+﻿#include "../stdafx.h"
 #include "Mouse.h"
 
 void Mouse::Init(HWND hWnd)

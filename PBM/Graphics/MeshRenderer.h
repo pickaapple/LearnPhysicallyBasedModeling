@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "../Game/Component.h"
 
 class Mesh;

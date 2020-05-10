@@ -1,4 +1,4 @@
-#include "Simple.hlsli"
+﻿#include "Simple.hlsli"
 
 float4 PSMain(VS_OUTPUT input) : SV_Target
 {

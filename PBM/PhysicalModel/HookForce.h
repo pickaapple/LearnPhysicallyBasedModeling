@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Force.h"
 #include "Particle.h"
 
@@ -8,9 +8,9 @@ public:
 	HookForce(Particle* a, Particle* b);
 	virtual void ApplyForce(ParticleSystem & system) override;
 protected:
-	float m_RestLength; //¾²Ï¢³¤¶È£¬µÈÓÚ¹¹ÔìÊ±Á£×ÓÖ®¼äµÄ³¤¶È¡£
-	float m_Kspring; // µ¯»ÉÏµÊı
-	float m_Kdamping; //µ¯»É×èÄáÏµÊı
+	float m_RestLength; //é™æ¯é•¿åº¦ï¼Œç­‰äºæ„é€ æ—¶ç²’å­ä¹‹é—´çš„é•¿åº¦ã€‚
+	float m_Kspring; // å¼¹ç°§ç³»æ•°
+	float m_Kdamping; //å¼¹ç°§é˜»å°¼ç³»æ•°
 	Particle *m_Pa, *m_Pb;
 };
 

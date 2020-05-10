@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum ETrackingState {
 	TRACKING_PREPARE,
@@ -17,15 +17,15 @@ public:
 	void WheelUpdate(double wheelDistance);
 	void ResetWheel();
 	double WheelDistance();
-	inline bool IsTrackingStarted() const;  // ³ıÁËSTOPEDÆäËû×´Ì¬¶¼ÊÇStarted
+	inline bool IsTrackingStarted() const;  // é™¤äº†STOPEDå…¶ä»–çŠ¶æ€éƒ½æ˜¯Started
 	inline bool IsTracking() const;
 	inline bool CheckTrackingState(ETrackingState state) const;
 	void BeginTracking();
 	void ResumeTracking();
 	void PauseTracking();
 	void EndTracking();
-	// ·µ»ØÊó±êÒÆ¶¯µÄ¾àÀë
-	// Tracking×´Ì¬ÏÂ²ÅÓĞÒâÒå£¬ÒòÎªÆäËû×´Ì¬²»»á¼ÇÂ¼Coord¡£
+	// è¿”å›é¼ æ ‡ç§»åŠ¨çš„è·ç¦»
+	// TrackingçŠ¶æ€ä¸‹æ‰æœ‰æ„ä¹‰ï¼Œå› ä¸ºå…¶ä»–çŠ¶æ€ä¸ä¼šè®°å½•Coordã€‚
 	inline POINT VirtualCoord() const;
 protected:
 	void TrackingPrepare(int x, int y);

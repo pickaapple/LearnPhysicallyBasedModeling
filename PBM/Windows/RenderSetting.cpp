@@ -1,4 +1,4 @@
-#include "../stdafx.h"
+ï»¿#include "../stdafx.h"
 #include "RenderSetting.h"
 
 ID3D11RasterizerState* RenderSetting::RSNoCull = nullptr;
@@ -16,14 +16,14 @@ void RenderSetting::InitSetting(ID3D11Device* device, ID3D11DeviceContext* conte
 	D3D11_RASTERIZER_DESC rasterizerDesc;
 	ZeroMemory(&rasterizerDesc, sizeof(rasterizerDesc));
 
-	// ÎŞ±³ÃæÌŞ³ıÄ£Ê½
+	// æ— èƒŒé¢å‰”é™¤æ¨¡å¼
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_NONE;
 	rasterizerDesc.FrontCounterClockwise = false;
 	rasterizerDesc.DepthClipEnable = true;
 	device->CreateRasterizerState(&rasterizerDesc, &RSNoCull);
 
-	// Ë³Ê±ÕëÌŞ³ıÄ£Ê½
+	// é¡ºæ—¶é’ˆå‰”é™¤æ¨¡å¼
 	rasterizerDesc.FillMode = D3D11_FILL_SOLID;
 	rasterizerDesc.CullMode = D3D11_CULL_BACK;
 	rasterizerDesc.FrontCounterClockwise = true;
@@ -39,7 +39,7 @@ void RenderSetting::InitSetting(ID3D11Device* device, ID3D11DeviceContext* conte
 	D3D11_SAMPLER_DESC sampDesc;
 	ZeroMemory(&sampDesc, sizeof(sampDesc));
 
-	// ÏßĞÔ¹ıÂËÄ£Ê½
+	// çº¿æ€§è¿‡æ»¤æ¨¡å¼
 	sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	sampDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -75,7 +75,7 @@ void RenderSetting::InitSetting(ID3D11Device* device, ID3D11DeviceContext* conte
 	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
 	device->CreateDepthStencilState(&dsDesc, &RenderSetting::DSSLess);
 
-	// Ğ´ÈëÄ£°åÖµµÄÉî¶È/Ä£°å×´Ì¬
+	// å†™å…¥æ¨¡æ¿å€¼çš„æ·±åº¦/æ¨¡æ¿çŠ¶æ€
 	dsDesc.DepthEnable = true;
 	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ZERO;
 	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
@@ -88,7 +88,7 @@ void RenderSetting::InitSetting(ID3D11Device* device, ID3D11DeviceContext* conte
 	dsDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
 	dsDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
 	dsDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
-	// ¶ÔÓÚ±³ÃæµÄ¼¸ºÎÌåÎÒÃÇÊÇ²»½øĞĞäÖÈ¾µÄ£¬ËùÒÔÕâÀïµÄÉèÖÃÎŞ¹Ø½ôÒª
+	// å¯¹äºèƒŒé¢çš„å‡ ä½•ä½“æˆ‘ä»¬æ˜¯ä¸è¿›è¡Œæ¸²æŸ“çš„ï¼Œæ‰€ä»¥è¿™é‡Œçš„è®¾ç½®æ— å…³ç´§è¦
 	dsDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 	dsDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_KEEP;
 	dsDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_REPLACE;
