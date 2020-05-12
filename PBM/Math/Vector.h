@@ -23,6 +23,7 @@ public:
 	Vector Normalized() const;
 
 	string ToString() const;
+	bool Equals(const Vector& other) const;
 
 	Vector operator-() const;
 	Vector& operator *=(const Matrix& matrix);
@@ -49,6 +50,10 @@ public:
 	static Vector Zero;
 	static Vector OnePosition;
 	static Vector OneVector;
+	static Vector Red;
+	static Vector Green;
+	static Vector Blue;
+	static Vector Gray;
 	XMVECTOR m_V;
 };
 
@@ -56,3 +61,5 @@ float * Vector::data() const
 {
 	return (float*)&m_V;
 }
+
+typedef Vector Color;

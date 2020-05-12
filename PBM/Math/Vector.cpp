@@ -1,6 +1,8 @@
 ﻿#include "Matrix.h"
 #include "Vector.h"
 
+#include "../Common/utility.h"
+
 #include <algorithm>
 #include <cmath>
 
@@ -66,6 +68,11 @@ string Vector::ToString() const
 {
 	auto info = "x:" + to_string(x()) + ";y:" + to_string(y()) + ";z:" + to_string(z()) + ";w:" + to_string(w());
 	return  info;
+}
+
+bool Vector::Equals(const Vector & other) const
+{
+	return Equal(x(), other.x()) && Equal(y(), other.y()) && Equal(z(), other.z());
 }
 
 Vector Vector::operator-() const
@@ -157,3 +164,10 @@ Vector Vector::Right(1, 0, 0, 0);
 Vector Vector::Zero;
 Vector Vector::OnePosition(1, 1, 1, 1);
 Vector Vector::OneVector(1, 1, 1, 0);
+
+
+Vector Vector::Red(1, 0, 0, 1);
+Vector Vector::Green(0, 1, 0, 1);
+Vector Vector::Blue(0, 0, 1, 1);
+Vector Vector::Gray(0.7, 0.7, 0.7, 1);
+

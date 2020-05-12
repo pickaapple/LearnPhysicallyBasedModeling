@@ -2,6 +2,13 @@
 #include "Component.h"
 #include "World.h"
 
+#include "../Graphics/Mesh.h"
+#include "../Graphics/Material.h"
+#include "../Graphics/SimpleShader.h"
+#include "../Graphics/MeshRenderer.h"
+#include "../Geometry/Geometry.h"
+
+
 GameObject::GameObject(const string& name)
 	: m_State(EGameObjectStarted)
 {
@@ -79,13 +86,7 @@ bool GameObject::AddComponent(Component * component)
 	return true;
 }
 
-#include "../Graphics/Mesh.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/SimpleShader.h"
-#include "../Graphics/MeshRenderer.h"
-#include "../Geometry/Geometry.h"
-
-GameObject* CreateMeshObject(const string& name, MeshData& meshData)
+GameObject* GameObject::CreateMeshObject(const string & name, MeshData & meshData)
 {
 	auto o = new GameObject(name);
 	o->AddComponent(new Material(new SimpleShader()));
@@ -94,17 +95,17 @@ GameObject* CreateMeshObject(const string& name, MeshData& meshData)
 	return o;
 }
 
-GameObject * CreateCube(float width, float height, float depth,
+GameObject * GameObject::CreateCube(float width, float height, float depth,
 	const Vector & color)
 {
 	auto&& cubeMeshData = Geometry::CreateBox(width, height, depth, color);
-	auto cube = CreateMeshObject("Cube", cubeMeshData);
+	auto cube = GameObject::CreateMeshObject("Cube", cubeMeshData);
 	return cube;
 }
 
-GameObject* CreateSphere(float radius, const Vector& color)
+GameObject* GameObject::CreateSphere(float radius, const Vector& color)
 {
 	auto&& meshData = Geometry::CreateSphere(radius, 16, 16, color);
-	auto sphere = CreateMeshObject("Sphere", meshData);
+	auto sphere = GameObject::CreateMeshObject("Sphere", meshData);
 	return sphere;
 }

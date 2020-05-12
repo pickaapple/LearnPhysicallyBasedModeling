@@ -2,8 +2,8 @@
 
 #include "../Common/utility.h"
 
-HookForce::HookForce(Particle * a, Particle * b)
-	:m_Pa(a), m_Pb(b), m_Kspring(1), m_Kdamping(1)
+HookForce::HookForce(Particle * a, Particle * b, float kSpring)
+	:m_Pa(a), m_Pb(b), m_Kspring(kSpring), m_Kdamping(1)
 {
 	m_RestLength = Vector::Distance(a->GetPos(), b->GetPos());
 }

@@ -11,11 +11,13 @@ public:
 	void AddMassSpring(MassSpring* element);
 	void RemoveMassSpring(MassSpring* element);
 	ParticleSystem& GetParticleSystem();
+	void SetGravityValid(bool valid);
 protected:
 	virtual void Updated() override;
 public:
 	Gravity m_Gravity;
 protected:
+	bool m_GravityValid;
 	ODESolver m_ODESolver;
 	ParticleSystem m_ParticleSystem;
 };

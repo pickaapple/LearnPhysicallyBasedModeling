@@ -26,7 +26,7 @@ ParticleState::ParticleState(ParticleState && other)
 
 ParticleSystem::ParticleSystem() :
 	m_GroundNormal(0, 1, 0, 0),
-	m_GroundY(-5),
+	m_GroundY(0),
 	m_Krestitution(0.5),
 	m_Kfriction(0.5)
 {

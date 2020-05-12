@@ -4,11 +4,34 @@
 #include "../Graphics/Mesh.h"
 #include "MassSpringSystem.h"
 #include "HookForce.h"
+#include "DragForce.h"
 
 MassSpring::~MassSpring()
 {
+	Clear();
+}
+
+void MassSpring::Clear()
+{
 	for (size_t i = 0; i < m_Particles.size(); ++i)delete m_Particles[i];
 	for (size_t i = 0; i < m_Forces.size(); ++i)delete m_Forces[i];
+	m_Particles.clear();
+	m_Forces.clear();
+}
+
+MassSpringSystem * MassSpring::GetSystem()
+{
+	if (m_MSSystem == nullptr) {
+		m_MSSystem = GameObject::Find<MassSpringSystem>("MassSpringSystem");
+		if (m_MSSystem == nullptr)
+			m_MSSystem = new MassSpringSystem();
+	}
+	return m_MSSystem;
+}
+
+void MassSpring::SetData(MassSpringData&& data)
+{
+	m_Data = std::move(data);
 }
 
 void MassSpring::Started()
@@ -19,40 +42,34 @@ void MassSpring::Started()
 		Debug::LogError("MassSpring组件所在的GameObject缺少Mesh组件");
 		return;
 	}
-	m_MSSystem = GameObject::Find<MassSpringSystem>("MassSpringSystem");
-	if (m_MSSystem == nullptr)
-		m_MSSystem = new MassSpringSystem();
-	const auto& meshData = m_Mesh->GetMeshData();
-	size_t vertexCount = meshData.Vertex.size();
-	for (size_t i = 0; i < vertexCount; ++i)
-	{
-		auto& vertex = meshData.Vertex[i];
-		auto particle = new Particle(vertex.Pos, 1);
-		m_Particles.push_back(particle);
-	}
-	size_t triangleCount = meshData.Indices.size() / 3;
-	vector<vector<bool>> connectFlags(vertexCount, vector<bool>(vertexCount, false));
-	auto pushForce = [&connectFlags, this](int index1, int index2)
-	{
-		if (!connectFlags[index1][index2])
+
+	auto matrix = gameObject->m_Transform.GetMatrix();
+
+	for (auto v : m_Data.m_Vertex)
+		m_Particles.push_back(new Particle(v->m_Pos * matrix, v->m_Mass));
+	for (auto& l : m_Data.m_Links) {
+		Force* force = nullptr;
+		switch (l->Type)
 		{
-			connectFlags[index1][index2] = true;
-			connectFlags[index2][index1] = true;
-			auto force = new HookForce(m_Particles[index1], m_Particles[index2]);
-			m_Forces.push_back(force);
+		case HOOK_FORCE:
+		{
+			auto& data = l->Data.Hook;
+			force = new HookForce(m_Particles[data.X], m_Particles[data.Y], data.Spring);
 		}
-	};
-	for (size_t i = 0; i < triangleCount; ++i)
-	{
-		size_t start = i * 3;
-		auto index1 = meshData.Indices[start];
-		auto index2 = meshData.Indices[start + 1];
-		auto index3 = meshData.Indices[start + 2];
-		pushForce(index1, index2);
-		pushForce(index1, index3);
-		pushForce(index2, index3);
+		break;
+		case DRAG_FORCE:
+		{
+			auto& data = l->Data.Drag;
+			force = new DragForce(m_Particles[data.X], data.Force);
+		}
+		break;
+		default:
+			continue;
+		}
+		m_Forces.push_back(force);
 	}
-	m_MSSystem->AddMassSpring(this);
+	auto system = GetSystem();
+	system->AddMassSpring(this);
 }
 
 void MassSpring::Update()
@@ -61,8 +78,7 @@ void MassSpring::Update()
 	{
 		for (size_t i = 0; i < m_Particles.size(); ++i)
 		{
-			auto* p = m_Particles[i];
-			m_Mesh->SetVertexPosition(p->GetPos(), i);
+			m_Data.m_Vertex[i]->Update(*m_Mesh, *m_Particles[i]);
 		}
 	}
 }

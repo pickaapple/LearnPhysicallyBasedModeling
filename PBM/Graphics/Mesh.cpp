@@ -83,16 +83,17 @@ void Mesh::CreateVertexBuffer(ID3D11Device* device, bool dynamic)
 
 void Mesh::CreateIndexBuffer(ID3D11Device* device)
 {
+	vector<unsigned short> indices = m_MeshData.GetIndices();
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = (UINT)(sizeof(WORD) * m_MeshData.Indices.size());
+	bd.ByteWidth = (UINT)(sizeof(WORD) * indices.size());
 	bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	bd.CPUAccessFlags = 0;
 	bd.MiscFlags = 0;
 	D3D11_SUBRESOURCE_DATA InitData;
 	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = m_MeshData.Indices.data();
+	InitData.pSysMem = indices.data();
 	auto ret = device->CreateBuffer(&bd, &InitData, &m_pIndexBuffer);
 
 	if (FAILED(ret))

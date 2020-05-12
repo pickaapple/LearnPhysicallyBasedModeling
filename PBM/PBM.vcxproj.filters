@@ -134,6 +134,12 @@
     <ClInclude Include="Game\SunLight.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="Geometry\MassSpringData.h">
+      <Filter>Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\DragForce.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PBM.rc">
@@ -248,6 +254,12 @@
     </ClCompile>
     <ClCompile Include="Game\SunLight.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\MassSpringData.cpp">
+      <Filter>Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\DragForce.cpp">
+      <Filter>PhysicalModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

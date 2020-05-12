@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "../stdafx.h"
 #include "Transform.h"
 
 class Component;
+class MeshData;
 
 enum EState {
 	EGameObjectStarted,
@@ -17,9 +17,9 @@ public:
 	virtual ~GameObject();
 
 	template <class _Comp>
-	inline bool AddComponent();
+	inline _Comp* AddComponent();
 	template <class _Comp, class _A1>
-	inline bool AddComponent(_A1 a1);
+	inline _Comp* AddComponent(_A1 a1);
 	bool AddComponent(Component* component);
 	template<class _Comp>
 	_Comp* GetComponent();
@@ -30,6 +30,10 @@ public:
 
 	Matrix ModelMatrix();
 	void Destroy();
+
+	static GameObject * CreateMeshObject(const string & name, MeshData & meshData);
+	static GameObject* CreateCube(float width, float height, float depth, const Vector& color);
+	static GameObject* CreateSphere(float radius, const Vector& color);
 protected:
 	void Start();
 	void Update();
@@ -50,15 +54,17 @@ private:
 };
 
 template<class _Comp>
-bool GameObject::AddComponent()
+_Comp* GameObject::AddComponent()
 {
 	auto* component = new _Comp();
 	static_assert(is_base_of<Component, _Comp>::value, "组件必须继承于Component类");
-	return AddComponent(component);
+	if (AddComponent(component))
+		return component;
+	return nullptr;
 }
 
 template<class _Comp, class _A1>
-bool GameObject::AddComponent(_A1 a1)
+_Comp* GameObject::AddComponent(_A1 a1)
 {
 	return AddComponent(new _Comp(a1));
 }
@@ -80,7 +86,3 @@ T* GameObject::Find(const string& name)
 	auto gameObject = GameObject::Find(name);
 	return dynamic_cast<T*>(gameObject);
 }
-
-GameObject* CreateCube(float width, float height, float depth, const Vector& color);
-
-GameObject* CreateSphere(float radius, const Vector& color);

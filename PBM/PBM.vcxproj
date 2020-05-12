@@ -161,6 +161,7 @@
     <ClInclude Include="Game\Transform.h" />
     <ClInclude Include="Game\World.h" />
     <ClInclude Include="Geometry\Geometry.h" />
+    <ClInclude Include="Geometry\MassSpringData.h" />
     <ClInclude Include="Geometry\MeshData.h" />
     <ClInclude Include="Graphics\Light.h" />
     <ClInclude Include="Graphics\Material.h" />
@@ -172,6 +173,10 @@
     <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Vector.h" />
     <ClInclude Include="PBM.h" />
+    <ClInclude Include="PhysicalModel\DragForce.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PhysicalModel\Force.h" />
     <ClInclude Include="PhysicalModel\Gravity.h" />
     <ClInclude Include="PhysicalModel\HookForce.h" />
@@ -200,6 +205,7 @@
     <ClCompile Include="Game\Transform.cpp" />
     <ClCompile Include="Game\World.cpp" />
     <ClCompile Include="Geometry\Geometry.cpp" />
+    <ClCompile Include="Geometry\MassSpringData.cpp" />
     <ClCompile Include="Geometry\MeshData.cpp" />
     <ClCompile Include="Graphics\Light.cpp" />
     <ClCompile Include="Graphics\Material.cpp" />
@@ -211,6 +217,10 @@
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Vector.cpp" />
     <ClCompile Include="PBM.cpp" />
+    <ClCompile Include="PhysicalModel\DragForce.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PhysicalModel\Force.cpp" />
     <ClCompile Include="PhysicalModel\Gravity.cpp" />
     <ClCompile Include="PhysicalModel\HookForce.cpp" />

@@ -7,7 +7,7 @@ Camera::Camera(const string& name) :
 	GameObject(name),
 	m_ThirdPlayerInfo({ 20.0, 25.0, 10.0 })
 {
-	LookTo({ 0.0, 0.0, 0.0, 1.0 }, { 0.0, 0.0, 1.0, 0 }, { 0.0, 1.0, 0.0,0 });
+	LookTo({ 0.0, 0.0, -10.0, 1.0 }, { 0.0, 0.0, 1.0, 0 }, { 0.0, 1.0, 0.0,0 });
 }
 
 void Camera::SetCameraMode(ECameraMode mode, GameObject* target)

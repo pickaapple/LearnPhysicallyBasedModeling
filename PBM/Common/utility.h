@@ -68,3 +68,7 @@ bool LT(float a, float b);
 bool LET(float a, float b);
 bool MT(float a, float b);
 bool MET(float a, float b);
+
+#include <algorithm>
+
+#define ErazeRemove(vector, element) (vector.erase(std::remove(vector.begin(), vector.end(), element), vector.end()))

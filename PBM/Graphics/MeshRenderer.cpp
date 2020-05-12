@@ -31,10 +31,18 @@ void MeshRenderer::Render(ID3D11DeviceContext * context, RenderState& state)
 	context->IASetVertexBuffers(0, 1, &m_Mesh->m_pVertexBuffer, &stride, &offset);
 	context->IASetIndexBuffer(m_Mesh->m_pIndexBuffer, DXGI_FORMAT_R16_UINT, 0);
 	UINT start = 0;
-	UINT count = (UINT)(m_Mesh->m_MeshData.Indices.size());
+	UINT count = (UINT)(m_Mesh->m_MeshData.TriangleIndices.size());
 	if (count != 0)
 	{
 		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		context->DrawIndexed(count, start, 0);
+		start += count;
+	}
+	count = (UINT)(m_Mesh->m_MeshData.LineIndices.size());
+	if (count != 0)
+	{
+		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_LINELIST);
+		context->DrawIndexed(count, start, 0);
+		start += count;
 	}
 }

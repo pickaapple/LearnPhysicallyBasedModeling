@@ -23,7 +23,10 @@ public:
 class MeshData
 {
 public:
+	vector<unsigned short> GetIndices();
+public:
 	vector<MeshVertex> Vertex;
-	vector<unsigned short> Indices;
+	vector<unsigned short> TriangleIndices;
+	vector<unsigned short> LineIndices;
 };
 
