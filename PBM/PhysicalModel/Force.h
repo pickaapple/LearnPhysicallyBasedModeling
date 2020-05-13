@@ -5,6 +5,6 @@ class ParticleSystem;
 class Force
 {
 public:
-	virtual void ApplyForce(ParticleSystem& system) = 0;
+	virtual void ApplyForce(ParticleSystem& system, float deltaTime) = 0;
 };
 

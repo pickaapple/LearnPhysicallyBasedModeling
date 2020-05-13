@@ -5,6 +5,7 @@
 #include "MassSpringSystem.h"
 #include "HookForce.h"
 #include "DragForce.h"
+#include "DivForce.h"
 
 MassSpring::~MassSpring()
 {
@@ -54,13 +55,23 @@ void MassSpring::Started()
 		case HOOK_FORCE:
 		{
 			auto& data = l->Data.Hook;
-			force = new HookForce(m_Particles[data.X], m_Particles[data.Y], data.Spring);
+			auto hook = new HookForce(m_Particles[data.X], m_Particles[data.Y], data.Spring);
+			hook->m_PinA = data.PinX;
+			hook->m_PinB = data.PinY;
+			force = hook;
 		}
 		break;
 		case DRAG_FORCE:
 		{
 			auto& data = l->Data.Drag;
 			force = new DragForce(m_Particles[data.X], data.Force);
+		}
+		break;
+		case DIV_FORCE:
+		{
+			auto& data = l->Data.Div;
+			data.ForcePointer->m_P = m_Particles[data.X];
+			force = data.ForcePointer;
 		}
 		break;
 		default:

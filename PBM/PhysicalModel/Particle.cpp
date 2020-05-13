@@ -49,3 +49,8 @@ void Particle::AddForce(const Vector & f)
 	m_F += f;
 }
 
+void Particle::AddVelocity(const Vector & v)
+{
+	m_V += v;
+}
+

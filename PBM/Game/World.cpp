@@ -12,28 +12,15 @@
 #include "../Windows/Mouse.h"
 #include "../Windows/Keyboard.h"
 
+#include "../Examples/CubeMassSpring.h"
+#include "../Examples/ABeadOnAWire.h"
+
 World::World() :m_DeltaTime(1.0) {}
 
 World::~World()
 {
 	for (auto gameObject : m_GameObjectList)
 		delete gameObject;
-}
-
-void CreateCubeAndSphere(World* world)
-{
-	auto cube = GameObject::CreateCube(2, 2, 2, Vector(1, 1, 1, 1));
-	cube->m_Transform.Move(0, 4, 0);
-	auto massSpring = cube->AddComponent<MassSpring>();
-	auto cubeMSData = Geometry::CreateBoxMS(2, 2, 2, 1, 1);
-	cubeMSData.AddDrag(cubeMSData.Vertex(0)->m_Pos, Vector({ 0,-2,0,0 }));
-	massSpring->SetData(move(cubeMSData));
-	//关闭重力
-	massSpring->GetSystem()->SetGravityValid(false);
-
-	auto sphere = GameObject::CreateSphere(3, Vector(1, 1, 1, 1));
-	sphere->m_Transform.Move(4, 4, 0);
-	world->m_pMainCamera->SetCameraMode(THIRD_PLAYER, sphere);
 }
 
 void CreateCoordinate()
@@ -60,7 +47,9 @@ void World::InitResource()
 	m_pMainCamera = new Camera("MainCamera");
 	m_pKeyboard->RegisterKeyStateListener(KEY_R, KEY_STATE_DOWN, m_pMainCamera);
 
-	CreateCubeAndSphere(this);
+	//CubeMassSpring example1;
+	ABeadOnAWire example2;
+
 	//CreateCoordinate();
 	auto groundGridData = Geometry::CreateGrid(50, (unsigned short)25, Color::Gray);
 	GameObject::CreateMeshObject("GroundGrid", groundGridData);
@@ -79,7 +68,7 @@ bool World::Run()
 {
 	float ClearColor[4] = { 0.0f, 0.125f, 0.6f, 1.0f }; // RGBA
 	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);
-	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0, 0);
+	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0, 0);
 
 	for (size_t i = 0; i < m_GameObjectList.size(); ++i)
 	{

@@ -182,3 +182,22 @@ MeshData Geometry::CreateGrid(float length, unsigned short count, const  Vector&
 	}
 	return data;
 }
+
+MeshData Geometry::CreateCircle(float radius, const Vector& center, unsigned short slices, const Vector & color)
+{
+	MeshData meshData;
+	float deltaRadian = 2 * XM_PI / slices;
+	for (unsigned short j = 0; j < slices; ++j)
+	{
+		float curRadian = deltaRadian * j;
+		float x = radius * cosf(curRadian);
+		float z = radius * sinf(curRadian);
+		Vector pos = Vector({ x,0,z,1 }) + center.xyz();
+		meshData.Vertex.push_back({ pos,  color, pos.Normalized() });
+	}
+	for (unsigned short j = 0; j < slices; ++j) {
+		meshData.LineIndices.push_back(j);
+		meshData.LineIndices.push_back((j + 1) % slices);
+	}
+	return meshData;
+}

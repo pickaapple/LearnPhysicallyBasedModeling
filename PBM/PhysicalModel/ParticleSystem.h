@@ -50,7 +50,7 @@ public:
 	//一个粒子状态对时间求导为{velocity, acceleration} 6字节
 	ParticleState Derivative() const;
 	void ZeroParticlesForces();
-	void CalculateForces();
+	void CalculateForces(float deltaTime);
 	//根据两个粒子状态判断状态之间的间隔期间，是否发生碰撞。
 	//如果发生碰撞则通过线性插值计算出第一个粒子发生碰撞时刻的状态。
 	//碰撞时刻，从0时刻（preState所在时刻）开始计算

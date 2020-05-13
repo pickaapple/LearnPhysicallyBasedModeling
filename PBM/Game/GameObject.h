@@ -34,6 +34,7 @@ public:
 	static GameObject * CreateMeshObject(const string & name, MeshData & meshData);
 	static GameObject* CreateCube(float width, float height, float depth, const Vector& color);
 	static GameObject* CreateSphere(float radius, const Vector& color);
+	static GameObject* CreateCircle(float radius, const Vector& color);
 protected:
 	void Start();
 	void Update();

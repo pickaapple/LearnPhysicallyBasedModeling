@@ -16,6 +16,7 @@ public:
 	float x() const;
 	float y() const;
 	float z() const;
+	Vector xyz() const;
 	float w() const;
 	float Length() const;
 	void Normalize();

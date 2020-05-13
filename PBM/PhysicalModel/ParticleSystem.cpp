@@ -73,10 +73,10 @@ void ParticleSystem::ZeroParticlesForces()
 		p->ResetForce();
 }
 
-void ParticleSystem::CalculateForces()
+void ParticleSystem::CalculateForces(float deltaTime)
 {
 	for (auto f : m_Forces)
-		f->ApplyForce(*this);
+		f->ApplyForce(*this, deltaTime);
 }
 
 bool ParticleSystem::CollisionDetection(const ParticleState & preState, ParticleState & nextState, ODESolver& solver, float& collisionTime)

@@ -95,18 +95,11 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 	depthSencilDesc.MiscFlags = 0;
 	ret = device->CreateTexture2D(&depthSencilDesc, nullptr, &depthStencilBuffer);
 	if (FAILED(ret)) return FALSE;
+
 	ret = device->CreateDepthStencilView(depthStencilBuffer, nullptr, &depthStencilView);
 	if (FAILED(ret)) return FALSE;
 
 	immediateContext->OMSetRenderTargets(1, &renderTargetView, depthStencilView);
-	//D3D11_DEPTH_STENCIL_DESC dsDesc;
-	//// Depth test parameters
-	//dsDesc.DepthEnable = true;
-	//dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	//dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
-	//ID3D11DepthStencilState * pDSState;
-	//device->CreateDepthStencilState(&dsDesc, &pDSState);
-	//immediateContext->OMSetDepthStencilState(pDSState, 1);
 
 	//设置视口映射裁剪空间坐标系
 	D3D11_VIEWPORT vp;
@@ -117,7 +110,7 @@ BOOL MyWindow::InitInstance(int nCmdShow)
 	vp.TopLeftX = 0.0f;
 	vp.TopLeftY = 0.0f;
 	immediateContext->RSSetViewports(1, &vp);
-	immediateContext->RSSetState(RenderSetting::RSWireframe);
+	immediateContext->RSSetState(RenderSetting::RSNoCull);
 
 	m_Mouse.Init(hWnd);
 

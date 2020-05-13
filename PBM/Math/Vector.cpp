@@ -39,6 +39,11 @@ float Vector::z() const
 	return XMVectorGetZ(m_V);
 }
 
+Vector Vector::xyz() const
+{
+	return Vector(x(), y(), z(), 0);
+}
+
 float Vector::w() const
 {
 	return XMVectorGetW(m_V);

@@ -12,6 +12,7 @@ public:
 	//设置顶点坐标，length表示顶点数量，oneSize表示坐标分量数，step表示坐标与坐标之间的间隔数
 	void SetVertexPositions(const float* pos, size_t oneSize, size_t length, size_t step);
 	void SetVertexPosition(const Vector& pos, size_t index);
+	void AddVertexPosition(const Vector& vector, size_t index);
 	void PrepareRender(ID3D11DeviceContext * context);
 protected:
 	virtual void Started() override;

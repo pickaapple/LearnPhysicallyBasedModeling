@@ -62,10 +62,10 @@ void MassSpringSystem::SetGravityValid(bool valid)
 
 void MassSpringSystem::Updated()
 {
-	m_ParticleSystem.ZeroParticlesForces();
-	m_ParticleSystem.CalculateForces();
 	auto world = World::GetInstance();
 	float deltaTime = (float)(world->m_DeltaTime / 1000);
+	m_ParticleSystem.ZeroParticlesForces();
+	m_ParticleSystem.CalculateForces(deltaTime);
 	auto curState = m_ParticleSystem.GetState();
 	auto nextState = m_ODESolver.EulerStep(m_ParticleSystem, deltaTime);
 	float collisionProcessTime = 0;
@@ -77,9 +77,13 @@ void MassSpringSystem::Updated()
 			break;
 		nextState = m_ODESolver.EulerStep(m_ParticleSystem, collisionTime);
 		m_ParticleSystem.SetState(nextState);
+
+		float newDeltaTime = deltaTime - collisionProcessTime;
+		m_ParticleSystem.ZeroParticlesForces();
+		m_ParticleSystem.CalculateForces(newDeltaTime);
 		m_ParticleSystem.CollisionResponse(m_ODESolver);
 		curState = m_ParticleSystem.GetState();
-		nextState = m_ODESolver.EulerStep(m_ParticleSystem, deltaTime - collisionProcessTime);
+		nextState = m_ODESolver.EulerStep(m_ParticleSystem, newDeltaTime);
 	}
 	m_ParticleSystem.SetState(nextState);
 	m_ParticleSystem.m_Time += deltaTime;

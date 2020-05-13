@@ -6,7 +6,7 @@ DragForce::DragForce(Particle * p, const Vector& f) :
 {
 }
 
-void DragForce::ApplyForce(ParticleSystem & system)
+void DragForce::ApplyForce(ParticleSystem & system, float deltaTime)
 {
 	m_P->AddForce(m_F);
 }

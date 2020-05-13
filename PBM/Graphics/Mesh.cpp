@@ -33,6 +33,12 @@ void Mesh::SetVertexPosition(const Vector& pos, size_t index)
 	m_MeshData.Vertex[index].Pos = pos;
 }
 
+void Mesh::AddVertexPosition(const Vector & vector, size_t index)
+{
+	m_DirtyVertexData = true;
+	m_MeshData.Vertex[index].Pos += vector;
+}
+
 void Mesh::PrepareRender(ID3D11DeviceContext * context)
 {
 	if (m_DirtyVertexData)

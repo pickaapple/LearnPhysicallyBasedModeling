@@ -14,6 +14,7 @@ public:
 	void SetForce(const float* f, size_t size);
 	void ResetForce();
 	void AddForce(const Vector& f);
+	void AddVelocity(const Vector& v);
 	inline void SetMass(float m);
 	inline const Vector& GetPos() const;
 	inline const Vector& GetVelocity() const;

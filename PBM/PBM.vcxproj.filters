@@ -29,6 +29,9 @@
     <Filter Include="Graphics\Shaders">
       <UniqueIdentifier>{c14940b5-2042-43fd-975d-6e366c1eddb3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{294de18e-72d0-44eb-b314-9c8f2bf7dc8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PBM.h" />
@@ -138,6 +141,15 @@
       <Filter>Geometry</Filter>
     </ClInclude>
     <ClInclude Include="PhysicalModel\DragForce.h">
+      <Filter>PhysicalModel</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\ABeadOnAWire.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\CubeMassSpring.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel\DivForce.h">
       <Filter>PhysicalModel</Filter>
     </ClInclude>
   </ItemGroup>
@@ -259,6 +271,15 @@
       <Filter>Geometry</Filter>
     </ClCompile>
     <ClCompile Include="PhysicalModel\DragForce.cpp">
+      <Filter>PhysicalModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\ABeadOnAWire.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\CubeMassSpring.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicalModel\DivForce.cpp">
       <Filter>PhysicalModel</Filter>
     </ClCompile>
   </ItemGroup>

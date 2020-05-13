@@ -109,3 +109,9 @@ GameObject* GameObject::CreateSphere(float radius, const Vector& color)
 	auto sphere = GameObject::CreateMeshObject("Sphere", meshData);
 	return sphere;
 }
+
+GameObject * GameObject::CreateCircle(float radius, const Vector & color)
+{
+	auto&& meshData = Geometry::CreateCircle(radius, Vector::Zero, 16, color);
+	return GameObject::CreateMeshObject("Circle", meshData);
+}

@@ -9,11 +9,13 @@ struct MeshVertex;
 class Mesh;
 class Particle;
 class Force;
+class DivForce;
 
 enum EForceType
 {
 	HOOK_FORCE,
-	DRAG_FORCE
+	DRAG_FORCE,
+	DIV_FORCE
 };
 
 struct LinkData
@@ -30,7 +32,13 @@ struct LinkData
 		{
 			int X, Y;
 			float Spring;
+			bool PinX, PinY;
 		} Hook;
+		struct DivForceData
+		{
+			int X;
+			DivForce* ForcePointer;
+		}Div;
 	} ForceData;
 	ForceData Data;
 };
@@ -52,9 +60,14 @@ public:
 	MassSpringData();
 	MassSpringData(MassSpringData&& other);
 	~MassSpringData();
-	VertexData* AddVertex(const Vector& pos, float mass);
-	LinkData* AddHookLink(const Vector& a, const Vector& b, float spring);
-	LinkData* AddDrag(const Vector& a, const Vector& f);
+	//添加质点坐标，localPos为局部坐标。
+	VertexData* AddVertex(const Vector& localPos, float mass);
+	//添加胡克弹簧力，localA为局部坐标。
+	LinkData* AddHookLink(const Vector& localA, const Vector& localB, float spring, bool pinA=false, bool pinB=false);
+	//添加抓取力，localA为局部坐标。
+	LinkData* AddDrag(const Vector& localA, const Vector& f);
+	//添加自定义力，localA为局部坐标。
+	LinkData* AddForce(const Vector&localA, DivForce* force);
 	VertexData* FindVertex(const Vector& pos);
 	int VertexIndex(const Vector& pos);
 	VertexData* Vertex(size_t index);

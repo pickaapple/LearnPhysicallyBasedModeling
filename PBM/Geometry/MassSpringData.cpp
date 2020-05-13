@@ -14,8 +14,11 @@ VertexData::VertexData(const Vector & pos, float mass, vector<size_t> indices) :
 void VertexData::Update(Mesh & mesh, const Particle & particle)
 {
 	auto matrix = mesh.gameObject->m_Transform.GetMatrix().Inversed();
+	auto particlePos = particle.GetPos()*matrix;
+	auto delta = particlePos - m_Pos;
 	for (auto i : m_MeshVertexIndex)
-		mesh.SetVertexPosition(particle.GetPos()*matrix, i);
+		mesh.AddVertexPosition(delta, i);
+	m_Pos = particlePos;
 }
 
 MassSpringData::MassSpringData()
@@ -38,33 +41,44 @@ MassSpringData::~MassSpringData()
 	m_Links.clear();
 }
 
-VertexData * MassSpringData::AddVertex(const Vector & pos, float mass)
+VertexData * MassSpringData::AddVertex(const Vector & localPos, float mass)
 {
-	auto curData = new VertexData(pos, mass, {});
+	auto curData = new VertexData(localPos, mass, {});
 	m_Vertex.push_back(curData);
 	return curData;
 }
 
-LinkData * MassSpringData::AddHookLink(const Vector & a, const Vector & b, float spring)
+LinkData * MassSpringData::AddHookLink(const Vector & localA, const Vector & localB, float spring, bool pinA, bool pinB)
 {
-	int ia = VertexIndex(a);
+	int ia = VertexIndex(localA);
 	if (ia < 0) return nullptr;
-	int ib = VertexIndex(b);
+	int ib = VertexIndex(localB);
 	if (ib < 0) return nullptr;
 	auto* link = new LinkData({});
 	link->Type = HOOK_FORCE;
-	link->Data.Hook = { ia, ib, spring };
+	link->Data.Hook = { ia, ib, spring ,pinA ,pinB };
 	m_Links.push_back(link);
 	return link;
 }
 
-LinkData * MassSpringData::AddDrag(const Vector & a, const Vector & f)
+LinkData * MassSpringData::AddDrag(const Vector & localA, const Vector & f)
 {
-	int ia = VertexIndex(a);
+	int ia = VertexIndex(localA);
 	if (ia < 0) return nullptr;
 	auto* link = new LinkData();
 	link->Type = DRAG_FORCE;
 	link->Data.Drag = { ia, f };
+	m_Links.push_back(link);
+	return link;
+}
+
+LinkData * MassSpringData::AddForce(const Vector & localA, DivForce * force)
+{
+	int ia = VertexIndex(localA);
+	if (ia < 0) return nullptr;
+	auto* link = new LinkData();
+	link->Type = DIV_FORCE;
+	link->Data.Div = { ia, force };
 	m_Links.push_back(link);
 	return link;
 }
